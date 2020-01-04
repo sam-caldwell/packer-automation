@@ -15,10 +15,10 @@
       "disk_size": "{{user `disk_size`}}",
       "floppy_files": [
         "{{user `autounattend`}}",
-        "./scripts/fixnetwork.ps1",
-        "./scripts/microsoft-updates.bat",
-        "./scripts/win-updates.ps1",
-        "./scripts/openssh.ps1"
+        "./scripts/windows/fixnetwork.ps1",
+        "./scripts/windows/microsoft-updates.bat",
+        "./scripts/windows/win-updates.ps1",
+        "./scripts/windows/openssh.ps1"
       ],
       "vboxmanage": [
         [
@@ -42,12 +42,12 @@
       "remote_path": "/tmp/script.bat",
       "execute_command": "{{.Vars}} cmd /c C:/Windows/Temp/script.bat",
       "scripts": [
-        "./scripts/vm-guest-tools.bat",
-        "./scripts/vagrant-ssh.bat",
-        "./scripts/disable-auto-logon.bat",
-        "./scripts/enable-rdp.bat",
-        "./scripts/compile-dotnet-assemblies.bat",
-        "./scripts/compact.bat"
+        "./scripts/windows/vm-guest-tools.bat",
+        "./scripts/windows/vagrant-ssh.bat",
+        "./scripts/windows/disable-auto-logon.bat",
+        "./scripts/windows/enable-rdp.bat",
+        "./scripts/windows/compile-dotnet-assemblies.bat",
+        "./scripts/windows/compact.bat"
       ]
     }
   ],
@@ -56,14 +56,14 @@
       "type": "vagrant",
       "keep_input_artifact": false,
       "output": "./box/windows_10_{{.Provider}}.box",
-      "vagrantfile_template": "vagrantfile-windows_10.template"
+      "vagrantfile_template": "vagrant/windows/vagrantfile-windows_10.template"
     }
   ],
   "variables": {
     "iso_url": "http://download.microsoft.com/download/C/3/9/C399EEA8-135D-4207-92C9-6AAB3259F6EF/10240.16384.150709-1700.TH1_CLIENTENTERPRISEEVAL_OEMRET_X64FRE_EN-US.ISO",
     "iso_checksum_type": "sha1",
     "iso_checksum": "56ab095075be28a90bc0b510835280975c6bb2ce",
-    "autounattend": "./answer_files/10/Autounattend.xml",
+    "autounattend": "./answer_files/windows/10/Autounattend.xml",
     "headless": "true",
     "cpus": "2",
     "memory_size": "2048",
