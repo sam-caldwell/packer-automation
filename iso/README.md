@@ -22,5 +22,5 @@ For example, you might want to start with one of the following:
 	* Direct Download: http://msdn.microsoft.com/subscriptions/json/GetDownloadRequest?brand=MSDN&locale=en-us&fileId=50573&activexDisabled=true&akamaiDL=false
 * Windows 10 enterprise evaluation license.
 	* [Microsoft Windows 10 Evaluation](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-10-enterprise)
-	* SHA1 Hash: 
+	* SHA1 Hash: 489ebee676e26cdb81377b0e6385c001a22589b8
         * Direct Download: <tbd>
