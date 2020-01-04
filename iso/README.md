@@ -20,3 +20,7 @@ For example, you might want to start with one of the following:
 	* File Name: en_windows_server_2012_vl_x64_dvd_917758.iso
 	* SHA1 Hash: 063BC26ED45C50D3745CCAD52DD7B3F3CE13F36D
 	* Direct Download: http://msdn.microsoft.com/subscriptions/json/GetDownloadRequest?brand=MSDN&locale=en-us&fileId=50573&activexDisabled=true&akamaiDL=false
+* Windows 10 enterprise evaluation license.
+	* [Microsoft Windows 10 Evaluation](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-10-enterprise)
+	* SHA1 Hash: 
+        * Direct Download: <tbd>
