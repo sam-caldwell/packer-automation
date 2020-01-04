@@ -1,37 +1,6 @@
 {
   "builders": [
     {
-      "type": "vmware-iso",
-      "iso_url": "{{user `iso_url`}}",
-      "iso_checksum_type": "{{user `iso_checksum_type`}}",
-      "iso_checksum": "{{user `iso_checksum`}}",
-      "headless": "{{user `headless`}}",
-      "boot_wait": "2m",
-      "ssh_username": "vagrant",
-      "ssh_password": "vagrant",
-      "ssh_wait_timeout": "2h",
-      "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
-      "guest_os_type": "windows8srv-64",
-      "tools_upload_flavor": "windows",
-      "disk_size": "{{user `disk_size`}}",
-      "vnc_port_min": 5900,
-      "vnc_port_max": 5980,
-      "floppy_files": [
-        "{{user `autounattend`}}",
-        "./scripts/fixnetwork.ps1",
-        "./scripts/microsoft-updates.bat",
-        "./scripts/win-updates.ps1",
-        "./scripts/openssh.ps1"
-      ],
-      "vmx_data": {
-        "RemoteDisplay.vnc.enabled": "false",
-        "RemoteDisplay.vnc.port": "5900",
-        "memsize": "{{user `memory_size`}}",
-        "numvcpus": "{{user `cpus`}}",
-        "scsi0.virtualDev": "lsisas1068"
-      }
-    },
-    {
       "type": "virtualbox-iso",
       "iso_url": "{{user `iso_url`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -63,49 +32,6 @@
           "{{.Name}}",
           "--cpus",
           "{{user `cpus`}}"
-        ]
-      ]
-    },
-    {
-      "type": "parallels-iso",
-      "iso_url": "{{user `iso_url`}}",
-      "iso_checksum_type": "{{user `iso_checksum_type`}}",
-      "iso_checksum": "{{user `iso_checksum`}}",
-      "boot_wait": "2m",
-      "ssh_username": "vagrant",
-      "ssh_password": "vagrant",
-      "ssh_wait_timeout": "2h",
-      "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
-      "guest_os_type": "win-10",
-      "parallels_tools_flavor": "win",
-      "disk_size": "{{user `disk_size`}}",
-      "floppy_files": [
-        "{{user `autounattend`}}",
-        "./scripts/fixnetwork.ps1",
-        "./scripts/microsoft-updates.bat",
-        "./scripts/win-updates.ps1",
-        "./scripts/openssh.ps1"
-      ],
-      "prlctl": [
-        [
-          "set", "{{.Name}}",
-          "--memsize", "{{user `memory_size`}}"
-        ],
-        [
-          "set", "{{.Name}}",
-          "--cpus", "{{user `cpus`}}"
-        ],
-        [
-          "set", "{{.Name}}",
-          "--winsystray-in-macmenu", "off"
-        ],
-        [
-          "set", "{{.Name}}",
-          "--startup-view", "window"
-        ],
-        [
-          "set", "{{.Name}}",
-          "--efi-boot", "off"
         ]
       ]
     }
