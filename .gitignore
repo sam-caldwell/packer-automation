@@ -1,5 +1,6 @@
 .DS_Store
-/iso/*
+/box/*.box
+/iso/*.iso
 !/iso/README.md
 /output-vmware/
 /output-vmware-iso/
