@@ -1,11 +1,17 @@
+clean:
+	[ -d ./packer_cache ] && rm -rf ./packer_cache
+	rm -rf ./box/*.box
+
+hash:
+	rm ./iso/hashes.txt
+	find ./iso/ -name "*.iso" -type f -exec shasum -a 1 {}  >> ./iso/hashes.txt \;
+
 win10:
 	packer build \
 		-force \
 		-color=true \
 		-var headless=false \
-    	-var iso_url=./iso/win10.iso \
-    	-var unattend=./answer_files/10/Autounattend.xml \
-    	-var iso_checksum=489ebee676e26cdb81377b0e6385c001a22589b8 windows_10.json
+    	packer/windows/windows_10.json
 
 
-PHONY=win10
+PHONY=win10 clean
