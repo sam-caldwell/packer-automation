@@ -38,7 +38,7 @@
                     below to look like this:
 
                     <ProductKey>
-                        <Key>33PXH-7Y6KF-2VJC9-XBBR8-HVTHH</Key>
+                        <Key>XXXXX-XXXXX-XXXXX-XXXXX-XXXXX</Key>
                         <WillShowUI>Never</WillShowUI>
                     </ProductKey>
 
@@ -46,9 +46,6 @@
                 -->
 
                 <!-- Product Key from http://technet.microsoft.com/en-us/library/jj612867.aspx -->
-                <ProductKey>MHF9N-XY6XB-WVXMC-BTDCT-MKKG7
-                    <WillShowUI>Never</WillShowUI>
-                </ProductKey>
             </UserData>
             <ImageInstall>
                 <OSImage>

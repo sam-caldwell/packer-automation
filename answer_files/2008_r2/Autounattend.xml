@@ -35,7 +35,7 @@
                 <ProductKey>
                     <!-- Do not uncomment the Key element if you are using trial ISOs -->
                     <!-- You must uncomment the Key element (and optionally insert your own key) if you are using retail or volume license ISOs -->
-                    <!--<Key>YC6KT-GKW9T-YTKYR-T4X34-R7VHC</Key>-->
+                    <!--<Key>XXXXX-XXXXX-XXXXX-XXXXX-XXXXX</Key>-->
                     <WillShowUI>Never</WillShowUI>
                 </ProductKey>
             </UserData>
