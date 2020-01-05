@@ -25,3 +25,13 @@ Things to Do
 * Add permissions to repo to require passing build for merge to master.
 * Add automation to tag the repo and release a new version.
 * Add a CODE_OF_CONDUCT file.
+
+
+## Windows environments
+* Implement Chocolatey.
+
+## Macos Environments
+* 
+
+# Linux Environments
+* 
