@@ -4,9 +4,12 @@
 #
 -include Makefile.in/setup.mk
 -include Makefile.in/packer.mk
+-include Makefile.in/vagrant-add-box.mk
 -include Makefile.in/windows/Makefile
 -include Makefile.in/macos/Makefile
 -include Makefile.in/linux/Makefile
+
+PATH=$PATH:$HOME/.bin
 
 .DEFAULT_GOAL := help
 
@@ -20,7 +23,8 @@ help:
 	@echo 'make list      : ...to list the available boxes you can build.'
 	@echo 'make list-boxes: ...to list the boxes we have built.'
 	@echo 'make <opsys>   : ...to create a box with the given operating system config.'
-	@echo 'make build     : ...to make a build the hard way (specify the packer file).'
+	@echo 'make add-local : ...to run vagrant box add and add your machines to your local vagrant.
+	@echo ' '
 	@echo 'make all       : ...to make clean and run against all your boxes. (and probably heat your home).'
 	@echo ' '
 	@echo 'documentation: https://github.com/sam-caldwell/packer-automation'
@@ -45,15 +49,6 @@ list-boxes:
 hash:
 	@rm ./iso/hashes.txt
 	@find ./iso/ -name "*.iso" -type f -exec shasum -a 1 {}  >> ./iso/hashes.txt \;
-
-add-local:
-	@echo "Adding box (${box}) from ./box/${box}.box to vagrant boxes (local)."
-	@[ ! -f "box/${box}.box" ] && echo "box not found: '${box}'" && exit 1
-	@VERSION=$(date +%s)
-	@BOX_NAME="packer-automation/$(box)"
-	@vagrant box add box/${box} --box-version $(VERSION) --name $(BOX_NAME)
-	@echo "Added box ($(box)) as ($BOX_NAME:$VERSION)"
-	@@echo "done.  Happy hacking!"
 
 .PHONY: all
 all:
