@@ -10,51 +10,61 @@ iso:
     url: "http://care.dlservice.microsoft.com/dl/download/evalx/win7/x64/EN/7600.16385.090713-1255_x64fre_enterprise_en-us_EVAL_Eval_Enterprise-GRMCENXEVAL_EN_DVD.iso"
     hash: "1d0d239a252cb53e466d39e752b17c28"
     alg: "md5"
+    download: true
 
   Windows/81:
     url: "http://download.microsoft.com/download/B/9/9/B999286E-0A47-406D-8B3D-5B5AD7373A4A/9600.16384.WINBLUE_RTM.130821-1623_X64FRE_ENTERPRISE_EVAL_EN-US-IRM_CENA_X64FREE_EN-US_DV5.ISO"
     hash: "5e4ecb86fd8619641f1d58f96e8561ec"
     alg: "md5"
+    download: false
 
   Windows/10:
     url: "http://download.microsoft.com/download/C/3/9/C399EEA8-135D-4207-92C9-6AAB3259F6EF/10240.16384.150709-1700.TH1_CLIENTENTERPRISEEVAL_OEMRET_X64FRE_EN-US.ISO"
     hash: "56ab095075be28a90bc0b510835280975c6bb2ce"
     alg: "md5"
+    download: true
 
   Windows/2008_R2:
     url: "http://download.microsoft.com/download/7/5/E/75EC4E54-5B02-42D6-8879-D8D3A25FBEF7/7601.17514.101119-1850_x64fre_server_eval_en-us-GRMSXEVAL_EN_DVD.iso"
     hash: "4263be2cf3c59177c45085c0a7bc6ca5"
     alg: "md5"
+    download: false
 
   Windows/2008_R2_Core:
     url: "http://download.microsoft.com/download/7/5/E/75EC4E54-5B02-42D6-8879-D8D3A25FBEF7/7601.17514.101119-1850_x64fre_server_eval_en-us-GRMSXEVAL_EN_DVD.iso"
     hash: "4263be2cf3c59177c45085c0a7bc6ca5"
     alg: "md5"
+    download: false
 
   Windows/2012:
     url: "http://download.microsoft.com/download/6/D/A/6DAB58BA-F939-451D-9101-7DE07DC09C03/9200.16384.WIN8_RTM.120725-1247_X64FRE_SERVER_EVAL_EN-US-HRM_SSS_X64FREE_EN-US_DV5.ISO"
     hash: "8503997171f731d9bd1cb0b0edc31f3d"
     alg: "md5"
+    download: false
 
   Windows/2012_R2:
     url: "http://download.microsoft.com/download/6/2/A/62A76ABB-9990-4EFC-A4FE-C7D698DAEB96/9600.16384.WINBLUE_RTM.130821-1623_X64FRE_SERVER_EVAL_EN-US-IRM_SSS_X64FREE_EN-US_DV5.ISO"
     hash: "458ff91f8abc21b75cb544744bf92e6a"
     alg: "md5"
+    download: false
 
   Windows/2012_R2_Core:
     url: "http://download.microsoft.com/download/6/2/A/62A76ABB-9990-4EFC-A4FE-C7D698DAEB96/9600.16384.WINBLUE_RTM.130821-1623_X64FRE_SERVER_EVAL_EN-US-IRM_SSS_X64FREE_EN-US_DV5.ISO"
     hash: "458ff91f8abc21b75cb544744bf92e6a"
     alg: "md5"
+    download: false
 
   Windows/2012_R2_Hyperv:
     url: "http://download.microsoft.com/download/F/7/D/F7DF966B-5C40-4674-9A32-D83D869A3244/9600.16384.WINBLUE_RTM.130821-1623_X64FRE_SERVERHYPERCORE_EN-US-IRM_SHV_X64FRE_EN-US_DV5.ISO"
     hash: "9c9e0d82cb6301a4b88fd2f4c35caf80"
     alg: "md5"
+    download: false
 
   Windows/2016:
     url: "http://download.microsoft.com/download/1/4/9/149D5452-9B29-4274-B6B3-5361DBDA30BC/14393.0.161119-1705.RS1_REFRESH_SERVER_EVAL_X64FRE_EN-US.ISO"
     hash: "70721288bbcdfe3239d8f8c0fae55f1f"
     alg: "md5"
+    download: true
 
 linux:
   deb:
@@ -62,29 +72,36 @@ linux:
       url: ""
       hash: ""
       alg: ""
+      download: true
   rpm:
     vagrant:
       url: ""
       hash: ""
       alg: ""
+      download: true
   src:
     osquery:
       url: ""
       hash: ""
       alg: ""
+      download: true
 
 macos:
   vagrant:
     url: ""
     hash: ""
     alg: ""
+    download: true
 
 windows:
   openssh:
     url: ""
     hash: ""
     alg: ""
+    download: true
+
   vagrant:
     url: ""
     hash: ""
     alg: ""
+    download: true
