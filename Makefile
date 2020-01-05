@@ -6,6 +6,7 @@
 -include Makefile.in/push.mk
 -include Makefile.in/setup.mk
 -include Makefile.in/packer.mk
+-include Makefile.in/linters.mk
 -include Makefile.in/fetch-all.mk
 -include Makefile.in/windows/Makefile
 -include Makefile.in/macos/Makefile
@@ -22,6 +23,7 @@ help:
 	@echo ' '
 	@echo 'make setup                     :  ...to setup your local environment (from scratch).'
 	@echo 'make list                      :  ...to list the available boxes you can build.'
+	@echo 'make lint                      :  ...to execute the linters on the project repository.'
 	@echo 'make fetch/all                 :  ...to fetch all assets (fetch-*)
 	@echo 'make fetch/iso                 :  ...to fetch the iso files listed in assetts/manifest.yml.'
 	@echo 'make fetch/windows             :  ...to fetch the windows files listed in assetts/manifest.yml.'
@@ -77,3 +79,4 @@ hash:
 .PHONY: all
 all:
 	@echo 'Executing everything...this is gonna take a long time.'
+
