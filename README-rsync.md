@@ -23,12 +23,12 @@ To install `rsync` in the Windows boxes you have to add the `./scripts/rsync.bat
       "remote_path": "/tmp/script.bat",
       "execute_command": "{{.Vars}} cmd /c C:/Windows/Temp/script.bat",
       "scripts": [
-        "./scripts/vm-guest-tools.bat",
-        "./scripts/chef.bat",
-        "./scripts/vagrant-ssh.bat",
-        "./scripts/compile-dotnet-assemblies.bat",
-        "./scripts/rsync.bat",
-        "./scripts/compact.bat"
+        "./scripts/windows/vm-guest-tools.bat",
+        "./scripts/windows/chef.bat",
+        "./scripts/windows/vagrant-ssh.bat",
+        "./scripts/windows/compile-dotnet-assemblies.bat",
+        "./scripts/windows/rsync.bat",
+        "./scripts/windows/compact.bat"
       ]
     },
 ```
