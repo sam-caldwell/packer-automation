@@ -29,9 +29,12 @@ Things to Do
 
 ## Windows environments
 * Implement Chocolatey.
+* Audit external dependencies and build them from source.
+* Audit external dependencies and cache them for faster build process.
+* Download all iso images to reduce delay and prevent outages.
 
 ## Macos Environments
-* 
+* Download all iso images
 
 # Linux Environments
-* 
+* Download all iso images
