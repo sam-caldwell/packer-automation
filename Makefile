@@ -23,7 +23,7 @@ help:
 	@echo 'make list      : ...to list the available boxes you can build.'
 	@echo 'make list-boxes: ...to list the boxes we have built.'
 	@echo 'make <opsys>   : ...to create a box with the given operating system config.'
-	@echo 'make add-local : ...to run vagrant box add and add your machines to your local vagrant.
+	@echo 'make add-local : ...to run vagrant box add and add your machines to your local vagrant.'
 	@echo ' '
 	@echo 'make all       : ...to make clean and run against all your boxes. (and probably heat your home).'
 	@echo ' '
