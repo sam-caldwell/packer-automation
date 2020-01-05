@@ -9,9 +9,9 @@
       "boot_wait": "2m",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
-      "ssh_wait_timeout": "8h",
+      "ssh_wait_timeout": "6h",
       "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
-      "guest_os_type": "windows7srv-64",
+      "guest_os_type": "windows8srv-64",
       "tools_upload_flavor": "windows",
       "disk_size": "{{user `disk_size`}}",
       "vnc_port_min": 5900,
@@ -39,9 +39,9 @@
       "boot_wait": "2m",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
-      "ssh_wait_timeout": "8h",
+      "ssh_wait_timeout": "6h",
       "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
-      "guest_os_type": "Windows2008_64",
+      "guest_os_type": "Windows2012_64",
       "disk_size": "{{user `disk_size`}}",
       "floppy_files": [
         "{{user `autounattend`}}",
@@ -72,9 +72,9 @@
       "boot_wait": "2m",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
-      "ssh_wait_timeout": "2h",
+      "ssh_wait_timeout": "6h",
       "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
-      "guest_os_type": "win-2008",
+      "guest_os_type": "win-2012",
       "parallels_tools_flavor": "win",
       "disk_size": "{{user `disk_size`}}",
       "floppy_files": [
@@ -117,6 +117,7 @@
         "./scripts/windows/vagrant-ssh.bat",
         "./scripts/windows/disable-auto-logon.bat",
         "./scripts/windows/enable-rdp.bat",
+        "./scripts/windows/compile-dotnet-assemblies.bat",
         "./scripts/windows/compact.bat"
       ]
     }
@@ -125,15 +126,15 @@
     {
       "type": "vagrant",
       "keep_input_artifact": false,
-      "output": "windows_2008_r2_core_{{.Provider}}.box",
-      "vagrantfile_template": "vagrantfile-windows_2008_r2.template"
+      "output": "windows_2012_r2_hyperv_{{.Provider}}.box",
+      "vagrantfile_template": "vagrantfile-windows_2012_r2.template"
     }
   ],
   "variables": {
-    "iso_url": "http://download.microsoft.com/download/7/5/E/75EC4E54-5B02-42D6-8879-D8D3A25FBEF7/7601.17514.101119-1850_x64fre_server_eval_en-us-GRMSXEVAL_EN_DVD.iso",
+    "iso_url": "http://download.microsoft.com/download/F/7/D/F7DF966B-5C40-4674-9A32-D83D869A3244/9600.16384.WINBLUE_RTM.130821-1623_X64FRE_SERVERHYPERCORE_EN-US-IRM_SHV_X64FRE_EN-US_DV5.ISO",
     "iso_checksum_type": "md5",
-    "iso_checksum": "4263be2cf3c59177c45085c0a7bc6ca5",
-    "autounattend": "./answer_files/2008_r2_core/Autounattend.xml",
+    "iso_checksum": "9c9e0d82cb6301a4b88fd2f4c35caf80",
+    "autounattend": "./answer_files/windows/2012_r2_hyperv/Autounattend.xml",
     "headless": "true",
     "cpus": "2",
     "memory_size": "2048",

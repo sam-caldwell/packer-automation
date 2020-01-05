@@ -9,15 +9,17 @@
       "boot_wait": "2m",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
-      "ssh_wait_timeout": "6h",
+      "ssh_wait_timeout": "8h",
       "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
-      "guest_os_type": "windows8srv-64",
+      "guest_os_type": "windows7-64",
       "tools_upload_flavor": "windows",
       "disk_size": "{{user `disk_size`}}",
       "vnc_port_min": 5900,
       "vnc_port_max": 5980,
       "floppy_files": [
         "{{user `autounattend`}}",
+        "./scripts/windows/dis-updates.ps1",
+        "./scripts/windows/hotfix-KB3102810.bat",
         "./scripts/windows/microsoft-updates.bat",
         "./scripts/windows/win-updates.ps1",
         "./scripts/windows/openssh.ps1"
@@ -39,12 +41,14 @@
       "boot_wait": "2m",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
-      "ssh_wait_timeout": "6h",
+      "ssh_wait_timeout": "8h",
       "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
-      "guest_os_type": "Windows2012_64",
+      "guest_os_type": "Windows7_64",
       "disk_size": "{{user `disk_size`}}",
       "floppy_files": [
         "{{user `autounattend`}}",
+        "./scripts/windows/dis-updates.ps1",
+        "./scripts/windows/hotfix-KB3102810.bat",
         "./scripts/windows/microsoft-updates.bat",
         "./scripts/windows/win-updates.ps1",
         "./scripts/windows/openssh.ps1"
@@ -72,13 +76,14 @@
       "boot_wait": "2m",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
-      "ssh_wait_timeout": "6h",
+      "ssh_wait_timeout": "8h",
       "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
-      "guest_os_type": "win-2012",
+      "guest_os_type": "win-7",
       "parallels_tools_flavor": "win",
       "disk_size": "{{user `disk_size`}}",
       "floppy_files": [
         "{{user `autounattend`}}",
+        "./scripts/windows/dis-updates.ps1",
         "./scripts/windows/microsoft-updates.bat",
         "./scripts/windows/win-updates.ps1",
         "./scripts/windows/openssh.ps1"
@@ -126,15 +131,15 @@
     {
       "type": "vagrant",
       "keep_input_artifact": false,
-      "output": "windows_2012_r2_core_{{.Provider}}.box",
-      "vagrantfile_template": "vagrantfile-windows_2012_r2.template"
+      "output": "windows_7_{{.Provider}}.box",
+      "vagrantfile_template": "vagrantfile-windows_7.template"
     }
   ],
   "variables": {
-    "iso_url": "http://download.microsoft.com/download/6/2/A/62A76ABB-9990-4EFC-A4FE-C7D698DAEB96/9600.16384.WINBLUE_RTM.130821-1623_X64FRE_SERVER_EVAL_EN-US-IRM_SSS_X64FREE_EN-US_DV5.ISO",
+    "iso_url": "http://care.dlservice.microsoft.com/dl/download/evalx/win7/x64/EN/7600.16385.090713-1255_x64fre_enterprise_en-us_EVAL_Eval_Enterprise-GRMCENXEVAL_EN_DVD.iso",
     "iso_checksum_type": "md5",
-    "iso_checksum": "458ff91f8abc21b75cb544744bf92e6a",
-    "autounattend": "./answer_files/2012_r2_core/Autounattend.xml",
+    "iso_checksum": "1d0d239a252cb53e466d39e752b17c28",
+    "autounattend": "./answer_files/windows/7/Autounattend.xml",
     "headless": "true",
     "cpus": "2",
     "memory_size": "2048",

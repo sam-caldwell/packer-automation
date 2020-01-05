@@ -5,21 +5,19 @@
       "iso_url": "{{user `iso_url`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
-      "headless": "{{user `headless`}}",
+      "headless": true,
       "boot_wait": "2m",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
-      "ssh_wait_timeout": "8h",
+      "ssh_wait_timeout": "6h",
       "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
-      "guest_os_type": "windows7-64",
+      "guest_os_type": "windows8srv-64",
       "tools_upload_flavor": "windows",
-      "disk_size": "{{user `disk_size`}}",
+      "disk_size": 61440,
       "vnc_port_min": 5900,
       "vnc_port_max": 5980,
       "floppy_files": [
         "{{user `autounattend`}}",
-        "./scripts/windows/dis-updates.ps1",
-        "./scripts/windows/hotfix-KB3102810.bat",
         "./scripts/windows/microsoft-updates.bat",
         "./scripts/windows/win-updates.ps1",
         "./scripts/windows/openssh.ps1"
@@ -27,8 +25,8 @@
       "vmx_data": {
         "RemoteDisplay.vnc.enabled": "false",
         "RemoteDisplay.vnc.port": "5900",
-        "memsize": "{{user `memory_size`}}",
-        "numvcpus": "{{user `cpus`}}",
+        "memsize": "2048",
+        "numvcpus": "2",
         "scsi0.virtualDev": "lsisas1068"
       }
     },
@@ -37,18 +35,16 @@
       "iso_url": "{{user `iso_url`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
-      "headless": "{{user `headless`}}",
+      "headless": true,
       "boot_wait": "2m",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
-      "ssh_wait_timeout": "8h",
+      "ssh_wait_timeout": "6h",
       "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
-      "guest_os_type": "Windows7_64",
-      "disk_size": "{{user `disk_size`}}",
+      "guest_os_type": "Windows2016_64",
+      "disk_size": 61440,
       "floppy_files": [
         "{{user `autounattend`}}",
-        "./scripts/windows/dis-updates.ps1",
-        "./scripts/windows/hotfix-KB3102810.bat",
         "./scripts/windows/microsoft-updates.bat",
         "./scripts/windows/win-updates.ps1",
         "./scripts/windows/openssh.ps1"
@@ -58,13 +54,13 @@
           "modifyvm",
           "{{.Name}}",
           "--memory",
-          "{{user `memory_size`}}"
+          "2048"
         ],
         [
           "modifyvm",
           "{{.Name}}",
           "--cpus",
-          "{{user `cpus`}}"
+          "2"
         ]
       ]
     },
@@ -76,14 +72,13 @@
       "boot_wait": "2m",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
-      "ssh_wait_timeout": "8h",
+      "ssh_wait_timeout": "6h",
       "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
-      "guest_os_type": "win-7",
+      "guest_os_type": "win-2016",
       "parallels_tools_flavor": "win",
-      "disk_size": "{{user `disk_size`}}",
+      "disk_size": 61440,
       "floppy_files": [
         "{{user `autounattend`}}",
-        "./scripts/windows/dis-updates.ps1",
         "./scripts/windows/microsoft-updates.bat",
         "./scripts/windows/win-updates.ps1",
         "./scripts/windows/openssh.ps1"
@@ -91,11 +86,11 @@
       "prlctl": [
         [
           "set", "{{.Name}}",
-          "--memsize", "{{user `memory_size`}}"
+          "--memsize", "2048"
         ],
         [
           "set", "{{.Name}}",
-          "--cpus", "{{user `cpus`}}"
+          "--cpus", "2"
         ],
         [
           "set", "{{.Name}}",
@@ -120,9 +115,9 @@
       "scripts": [
         "./scripts/windows/vm-guest-tools.bat",
         "./scripts/windows/vagrant-ssh.bat",
-        "./scripts/windows/disable-auto-logon.bat",
         "./scripts/windows/enable-rdp.bat",
         "./scripts/windows/compile-dotnet-assemblies.bat",
+        "./scripts/windows/disable-auto-logon.bat",
         "./scripts/windows/compact.bat"
       ]
     }
@@ -131,18 +126,14 @@
     {
       "type": "vagrant",
       "keep_input_artifact": false,
-      "output": "windows_7_{{.Provider}}.box",
-      "vagrantfile_template": "vagrantfile-windows_7.template"
+      "output": "windows_2016_{{.Provider}}.box",
+      "vagrantfile_template": "vagrantfile-windows_2016.template"
     }
   ],
   "variables": {
-    "iso_url": "http://care.dlservice.microsoft.com/dl/download/evalx/win7/x64/EN/7600.16385.090713-1255_x64fre_enterprise_en-us_EVAL_Eval_Enterprise-GRMCENXEVAL_EN_DVD.iso",
+    "iso_url": "http://download.microsoft.com/download/1/4/9/149D5452-9B29-4274-B6B3-5361DBDA30BC/14393.0.161119-1705.RS1_REFRESH_SERVER_EVAL_X64FRE_EN-US.ISO",
     "iso_checksum_type": "md5",
-    "iso_checksum": "1d0d239a252cb53e466d39e752b17c28",
-    "autounattend": "./answer_files/7/Autounattend.xml",
-    "headless": "true",
-    "cpus": "2",
-    "memory_size": "2048",
-    "disk_size": "61440"
+    "iso_checksum": "70721288bbcdfe3239d8f8c0fae55f1f",
+    "autounattend": "./answer_files/windows/2016/Autounattend.xml"
   }
 }
