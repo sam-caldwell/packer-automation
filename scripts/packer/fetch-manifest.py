@@ -30,7 +30,9 @@ def get_args() -> Namespace:
 
         :return: argparse.Namespace
     """
+
     parser = ArgumentParser(description=PROGRAM_DESCRIPTION)
+
     parser.add_argument(
         "--type",
         dest="type",
@@ -40,6 +42,7 @@ def get_args() -> Namespace:
         help="Asset class (group) to be downloaded.  This is a section "
              "within the manifest yaml file."
     )
+
     parser.add_argument(
         "--manifest",
         dest="manifest",
@@ -47,6 +50,7 @@ def get_args() -> Namespace:
         required=True,
         help="Manifest path/filename"
     )
+
     parser.add_argument(
         "--asset_cache_dir",
         dest="asset_cache_dir",
@@ -55,6 +59,7 @@ def get_args() -> Namespace:
         default=None,
         help="Optional asset cache directory."
     )
+
     parser.add_argument(
         "--force",
         dest="force",
@@ -62,7 +67,9 @@ def get_args() -> Namespace:
         action='store_true',
         help="Use force on download (deletes if it exists."
     )
+
     args = parser.parse_args()
+
     if not exists(args.manifest):
         print(f"Manifest file not found: '{args.manifest}'")
         exit(1)
