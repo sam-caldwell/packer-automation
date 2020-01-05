@@ -26,4 +26,4 @@ cmd /c C:\Windows\Temp\sdelete.exe -q -z C:
 
 powershell -C "Optimize-Volume -DriveLetter C -ReTrim -Verbose"
 powershell -C "Optimize-Volume -DriveLetter C -Defrag -Verbose"
-powershell -C "Optimize-Volume -DriveLetter C -SlabConsolidate -Verbose"
+#powershell -C "Optimize-Volume -DriveLetter C -SlabConsolidate -Verbose"
