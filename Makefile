@@ -28,18 +28,18 @@ help:
 	@echo 'make [feature-flags] add-local : ...to run vagrant box add and add your machines to your local vagrant.'
 	@echo ' '
 	@echo '   feature-flags:'
-	@echo '      on-virtualbox (not implemented)'
-	@echo '      on-vmware (not implemented)'
-	@echo '      on-parallels (not implemented)'
-	@echo '      on-aws (not implemented)'
-	@echo '      on-azure (not implemented)'
-	@echo '      to-vagrantup (not implemented)'
+	@echo '      on/virtualbox (not implemented)'
+	@echo '      on/vmware (not implemented)'
+	@echo '      on/parallels (not implemented)'
+	@echo '      on/aws (not implemented)'
+	@echo '      on/azure (not implemented)'
+	@echo '      to/vagrantup (not implemented)'
 	@echo ' '
 	@echo 'make all       : ...to make clean and run against all your boxes. (and probably heat your home).'
 	@echo ' '
 	@echo 'documentation: https://github.com/sam-caldwell/packer-automation'
 	@echo ' '
-k
+
 clean:
 	@echo "Cleaning..."
 	@rm -rf ./packer_cache &> /dev/null
