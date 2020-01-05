@@ -53,6 +53,3 @@ hash:
 .PHONY: all
 all:
 	@echo 'Executing everything...this is gonna take a long time.'
-
-# ToDo: Add a `make inventory` to create an `inventory.txt` of working environments.
-# ToDo: Add `make fetch` to download all artifacts that we would need for this repo.  Binaries, isos, etc.
