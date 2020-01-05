@@ -2,42 +2,44 @@
 # Windows section.  All the windows boxes should go in this section, ordered alphabetically because this
 #                   list is going to get very long.
 #
+
 .PHONY: windows/7
 windows/7:
-	packer build -force -color=true -var headless=false packer/windows/7.json
+	$(MAKE) PACKER_FILE="packer/windows/7.json" build
 
 .PHONY: windows/10
 windows/10:
-	packer build -force -color=true -var headless=false packer/windows/10.json
+	$(MAKE) PACKER_FILE="packer/windows/10.json" build
 
 .PHONY: windows/81
 windows/81:
-	packer build -force -color=true -var headless=false packer/windows/81.json
+	$(MAKE) PACKER_FILE="packer/windows/81.json" build
 
 .PHONY: windows/2008_r2
 windows/2008_r2:
-	packer build -force -color=true -var headless=false packer/windows/2008_r2.json
+	$(MAKE) PACKER_FILE="packer/windows/2008_r2.json" build
 
 .PHONY: windows/2008_r2_core
 windows/2008_r2_core:
-	packer build -force -color=true -var headless=false packer/windows/2008_r2_core.json
+	$(MAKE) PACKER_FILE="packer/windows/2008_r2_core.json" build
 
 .PHONY: windows/2012
 windows/2012:
-	packer build -force -color=true -var headless=false packer/windows/2012.json
+	$(MAKE) PACKER_FILE="packer/windows/2012.json" build
 
 .PHONY: windows/2012_r2
 windows/2012_r2:
-	packer build -force -color=true -var headless=false packer/windows/2012_r2.json
+	$(MAKE) PACKER_FILE="packer/windows/2012_r2.json" build
 
 .PHONY: windows/2012_r2_core
 windows/2012_r2_core:
-	packer build -force -color=true -var headless=false packer/windows/2012_r2_core.json
+	$(MAKE) PACKER_FILE="packer/windows/2012_r2_core.json" build
 
 .PHONY: windows/2012_r2_hyperv
 windows/2012_r2_hyperv:
-	packer build -force -color=true -var headless=false packer/windows/2012_r2_hyperv.json
+	$(MAKE) PACKER_FILE="packer/windows/2012_r2_hyperv.json" build
 
 .PHONY: windows/2016
 windows/2016:
-	packer build -force -color=true -var headless=false packer/windows/2016.json
+	$(MAKE) PACKER_FILE="packer/windows/2016.json" build
+
