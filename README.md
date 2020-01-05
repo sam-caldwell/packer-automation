@@ -7,64 +7,44 @@ This repository contains templates that can be used to create boxes for Vagrant 
 by [Joe Fitzgerald](https://github.com/joefitzgerald/packer-windows). 
 
 ## Supported Operating Systems
-### Windows 
-See [Notes about Supported Windows Environments](./docs/windows/notes_about_supported_environments.md)
- * Windows 2012 R2
- * Windows 2012 R2 Core
- * Windows 2012
- * Windows 2008 R2
- * Windows 2008 R2 Core
- * Windows 10
- * Windows 8.1
- * Windows 7
+To see what systems are currently supported, run
+```bash 
+make list
+```
 
-### MacOs
-See [Notes about Supported MacOs Environments](./docs/macos/notes_about_supported_environments.md)
- * MacOS High Sierra (planned)
- * MacOS Mojave (planned)
- * MacOS Catalina (planned)
+See also...
 
-### Linux
-See [Notes about Supported Linux Environments](./docs/linux/notes_about_supported_environments.md)
-  * Ubuntu 18.04 (planned)
-  * Gentoo (planned)
+* [Notes about Supported Windows Environments](./docs/windows/notes_about_supported_environments.md)
+
+* [Notes about Supported MacOs Environments](./docs/macos/notes_about_supported_environments.md)
+
+* [Notes about Supported Linux Environments](./docs/linux/notes_about_supported_environments.md)
  
 ## Getting Started
-The intent of this section is to automate everything from setup to finish using
-a single `Makefile`.  The idea is to keep this elegant and easy to use.
+The intent of this section is to automate everything from setup to finish using a single `Makefile`.  
+The idea is to keep this elegant and easy to use.
 
-### Installing Required Software
-This section will help install all you need for a local environment:
-#### Get Help
-```bash 
-make help
-```
-#### Software Requirements
-* [Packer](https://github.com/mitchellh/packer/blob/master/CHANGELOG.md) `1.5.1` or greater is required.
-* [Virtualbox](https://www.virtualbox.org/) <= `6.0`  (As of 4 Jan 2020, Version 6.1 and later do not work with vagrant).
-* [Vagrant](https://www.vagrantup.com/downloads.html) `2.1.1`
+First you'll need to install some [required software](docs/required_software.md).  Run `make setup` and you're done.
 
-```bash
-make setup
-```
+From time to time, you'll want to reset the environment.  Use `make clean` to do this.
 
-#### Clean up existing boxes
-This will clean up any existing boxes that have been built (in the `./box` directory)
-```bash
-make clean
-```
+Use `make help` to learn about the commands available in this system.
 
-#### Build a New Box
+#### Building Vagrant Boxes
 Ready to build a Vagrant box?  Run this...
 ```
 make <opsys_name>
 ```
-Here we just specify the target (e.g. win10 to build a Windows10 box) and
-we're free to go get a cup of coffee.
+
+To find out what boxes the system will let you build...
+```bash 
+make list
+```
 
 #### Other Documentation
 
 * [Adding a New Environment (OpSys) to the Project](docs/adding_new_box.md)
+
 * [How to enable RSync for Windows Templates](docs/enable-rsync-for-windows-templates.md)
 
 
