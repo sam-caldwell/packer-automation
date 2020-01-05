@@ -127,7 +127,7 @@
       "type": "vagrant",
       "keep_input_artifact": false,
       "output": "windows_2012_r2_hyperv_{{.Provider}}.box",
-      "vagrantfile_template": "vagrantfile-windows_2012_r2.template"
+      "vagrantfile_template": "./vagrant/windows/2012_r2.template"
     }
   ],
   "variables": {

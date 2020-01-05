@@ -56,7 +56,7 @@
       "type": "vagrant",
       "keep_input_artifact": false,
       "output": "./box/windows_10_{{.Provider}}.box",
-      "vagrantfile_template": "vagrant/windows/vagrantfile-windows_10.template"
+      "vagrantfile_template": "./vagrant/windows/10.template"
     }
   ],
   "variables": {

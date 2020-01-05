@@ -127,7 +127,7 @@
       "type": "vagrant",
       "keep_input_artifact": false,
       "output": "windows_81_{{.Provider}}.box",
-      "vagrantfile_template": "vagrantfile-windows_81.template"
+      "vagrantfile_template": "./vagrant/windows/81.template"
     }
   ],
   "variables": {
