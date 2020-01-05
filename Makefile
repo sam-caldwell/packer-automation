@@ -9,7 +9,7 @@
 -include Makefile.in/macos/Makefile
 -include Makefile.in/linux/Makefile
 
-PATH=$PATH:$HOME/.bin
+PATH += $HOME/.bin
 
 .DEFAULT_GOAL := help
 

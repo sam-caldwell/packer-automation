@@ -26,8 +26,7 @@ endif
 setup:
 	@echo 'setting up your local machine'
 	@echo 'HOST_OS:$(HOST_OS)'
-	@command -v vagrant &>/dev/null || $(MAKE) install-vagrant-$(HOST_OS)
-	@command -v packer &>/dev/null || $(MAKE) install-packer-$(HOST_OS)
-	@command -v virtualbox &>/dev/null || $(MAKE) install-virtualbox-$(HOST_OS)
-	@echo "Your system has all the software installed that is needed."
-
+	command -v vagrant &>/dev/null || $(MAKE) install-vagrant-$(HOST_OS)
+	command -v packer &>/dev/null || $(MAKE) install-packer-$(HOST_OS)
+	command -v virtualbox &>/dev/null || $(MAKE) install-virtualbox-$(HOST_OS)
+	echo "Your system has all the software installed that is needed."
