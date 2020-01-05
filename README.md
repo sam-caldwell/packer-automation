@@ -27,6 +27,7 @@ See [Notes about Supported MacOs Environments](./docs/macos/notes_about_supporte
 ### Linux
 See [Notes about Supported Linux Environments](./docs/linux/notes_about_supported_environments.md)
   * Ubuntu 18.04 (planned)
+  * Gentoo (planned)
  
 ## Getting Started
 The intent of this section is to automate everything from setup to finish using
