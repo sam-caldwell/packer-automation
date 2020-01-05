@@ -117,6 +117,8 @@
         "./scripts/windows/vagrant-ssh.bat",
         "./scripts/windows/disable-auto-logon.bat",
         "./scripts/windows/enable-rdp.bat",
+        "./scripts/windows/install7z.bat",
+        "./scripts/windows/installSdelete.bat",
         "./scripts/windows/compact.bat"
       ]
     }
