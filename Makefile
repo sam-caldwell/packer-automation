@@ -2,6 +2,7 @@
 # Packer Build Automation
 #
 #
+-include Makefile.in/setup.mk
 -include Makefile.in/packer.mk
 -include Makefile.in/windows/Makefile
 -include Makefile.in/macos/Makefile
