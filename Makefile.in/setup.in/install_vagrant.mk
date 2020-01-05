@@ -2,7 +2,8 @@ install-vagrant-macos:
 	@echo "Installing vagrant for macos"
 	curl https://releases.hashicorp.com/vagrant/2.2.6/vagrant_2.2.6_x86_64.dmg
 	hdiutil attach ./vagrant_2.2.6_x86_64.dmg
-	hdiutil detach ./vagrant_2.2.6_x86_64.dmg
+	sudo installer -pkg /Volumes/Vagrant/vagrant.pkg -target /
+	hdiutil detach /Volumes/Vagrant/
 
 install-vagrant-linux:
 	@echo "installing vagrant for linux"
