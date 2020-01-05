@@ -7,29 +7,33 @@ Notes about Supported Windows Environments
   the `ImageInstall`>`OSImage`>`InstallFrom`>`MetaData`>`Value` element
   (e.g. to Windows Server 2012 R2 SERVERDATACENTER).
 
+* Trial versions of Windows are used by default. These images can be used for 90-180 days 
+  without activation, depending on the Windows licensing in place for them.
+
 ## Product Keys
-The `Autounattend.xml` files are configured to work correctly with trial 
-ISOs (which will be downloaded and cached for you the first time you 
-perform a `packer build`). If you would like to use retail or volume 
-license ISOs, you need to update the `UserData`>`ProductKey` element 
-as follows:
+* The `Autounattend.xml` files are configured to work correctly with trial
+  ISOs (which will be downloaded and cached for you the first time you 
+  perform a `packer build`). If you would like to use retail or volume 
+  license ISOs, you need to update the `UserData`>`ProductKey` element 
+  as follows:
 
 * Uncomment the `<Key>...</Key>` element
+
 * Insert your product key into the `Key` element
 
-If you are going to configure your VM as a KMS client, you can use the 
-product keys at http://technet.microsoft.com/en-us/library/jj612867.aspx. 
-These are the default values used in the `Key` element.
+* If you are going to configure your VM as a KMS client, you can use the 
+  product keys at http://technet.microsoft.com/en-us/library/jj612867.aspx. 
+  These are the default values used in the `Key` element.
 
-### Windows Updates
+## Windows Updates
 
-The scripts in this repo will install all Windows updates – by default – 
-during Windows Setup. This is a _very_ time consuming process, depending 
-on the age of the OS and the quantity of updates released since the last 
-service pack. You might want to do yourself a favor during development and 
-disable this functionality, by commenting out the `WITH WINDOWS UPDATES` 
-section and uncommenting the `WITHOUT WINDOWS UPDATES` section 
-in `Autounattend.xml`:
+* The scripts in this repo will install all Windows updates – by default – 
+  during Windows Setup. This is a _very_ time consuming process, depending 
+  on the age of the OS and the quantity of updates released since the last 
+  service pack. You might want to do yourself a favor during development and 
+  disable this functionality, by commenting out the `WITH WINDOWS UPDATES` 
+  section and uncommenting the `WITHOUT WINDOWS UPDATES` section 
+  in `Autounattend.xml`:
 
 ```xml
 <!-- WITHOUT WINDOWS UPDATES -->
@@ -65,7 +69,7 @@ in `Autounattend.xml`:
 
 Doing so will give you hours back in your day, which is a good thing.
 
-### OpenSSH / WinRM
+## OpenSSH / WinRM
 
 Currently, [Packer](http://packer.io) has a single communicator that uses 
 SSH. This means we need an SSH server installed on Windows - which is not
@@ -91,3 +95,9 @@ installer, `msiexec.exe`.
 
 It's currently recommended that you add a second step to your pipeline
 and use Vagrant to install your packages through Chef.
+
+## Using .box Files With Vagrant
+
+The generated box files include a Vagrantfile template that is suitable for
+use with Vagrant 1.6.2+, which includes native support for Windows and uses
+WinRM to communicate with the box.
