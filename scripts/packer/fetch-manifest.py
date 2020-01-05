@@ -19,7 +19,7 @@ from argparse import Namespace
 from argparse import ArgumentParser
 
 PROGRAM_DESCRIPTION = """
-This script will read a given manifest YAML file download the artifacts to 
+This script will read a given manifest YAML file download the artifacts to
 a given asset caching directory and verify their md5 or sha1 hash.
 """
 
