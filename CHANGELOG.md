@@ -1,4 +1,9 @@
-## Unreleased
+## v2.0 (January 5, 2020)
+* removed udefrag in favor of powershell optimize.
+* Structured docs for readability as we scale out opsys.
+* Structured the project to allow extension into macos and linux.
+* Added Makefile to automate the processes a bit more.
+* Forked from Joe Fitzgerald's original repo (keeping history)
 * Fixed issue with Console Output in win-updates.ps1 (#245)
 * Added Windows 2016 build (#243)
 * Use VBox certs from guest addition (#247, #250)
