@@ -7,7 +7,7 @@ This repository contains templates that can be used to create boxes for Vagrant 
 by [Joe Fitzgerald](https://github.com/joefitzgerald/packer-windows). 
 
 ## Supported Operating Systems
-To see what systems are currently supported, run
+To see what systems are currently supported, run...
 ```bash 
 make list
 ```
@@ -24,11 +24,11 @@ See also...
 The intent of this section is to automate everything from setup to finish using a single `Makefile`.  
 The idea is to keep this elegant and easy to use.
 
-First you'll need to install some [required software](docs/required_software.md).  Run `make setup` and you're done.
+1. Install some [required software](docs/required_software.md).  Run `make setup` and you're done.
 
-From time to time, you'll want to reset the environment.  Use `make clean` to do this.
+2. From time to time, you'll want to reset the environment.  Use `make clean` to do this.
 
-Use `make help` to learn about the commands available in this system.
+3. Use `make help` to learn about the commands available in this system.
 
 #### Building Vagrant Boxes
 Ready to build a Vagrant box?  Run this...
