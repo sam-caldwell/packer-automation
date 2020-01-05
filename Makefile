@@ -31,4 +31,4 @@ win10:
     	packer/windows/windows_10.json
 
 
-PHONY=win10 clean hash
+.PHONY=win10 clean hash list help
