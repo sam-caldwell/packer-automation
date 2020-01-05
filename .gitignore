@@ -14,3 +14,12 @@
 /*.box
 /packer_cache/
 
+*.tar.gz
+*.zip
+*.dmg
+*.deb
+*.rpm
+*.7z
+*.msi
+
+*.py[co]
