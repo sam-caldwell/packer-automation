@@ -65,7 +65,7 @@ we're free to go get a cup of coffee.
 #### Other Documentation
 
 * [Adding a New Environment (OpSys) to the Project](docs/adding_new_box.md)
-
+* [How to enable RSync for Windows Templates](docs/enable-rsync-for-windows-templates.md)
 
 
 ### Contributing
