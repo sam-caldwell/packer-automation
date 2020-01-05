@@ -24,7 +24,7 @@ help:
 	@echo 'make setup                     :  ...to setup your local environment (from scratch).'
 	@echo 'make list                      :  ...to list the available boxes you can build.'
 	@echo 'make lint                      :  ...to execute the linters on the project repository.'
-	@echo 'make fetch/all                 :  ...to fetch all assets (fetch-*)
+	@echo 'make fetch/all                 :  ...to fetch all assets (fetch-*)'
 	@echo 'make fetch/iso                 :  ...to fetch the iso files listed in assetts/manifest.yml.'
 	@echo 'make fetch/windows             :  ...to fetch the windows files listed in assetts/manifest.yml.'
 	@echo 'make fetch/linux/deb           :  ...to fetch the linux/deb files listed in assetts/manifest.yml.'
@@ -38,13 +38,13 @@ help:
 	@echo 'make [feature-flags] push      : ...to push the set of all boxes created to local/remote stores.'
 	@echo ' '
 	@echo '   feature-flags:'
-	@echo '     on/*
+	@echo '     on/*'
 	@echo '        on/virtualbox                      : Builds for Virtualbox virtual machines.'
 	@echo '        on/vmware (not implemented)        : Builds for VMware virtual machines.'
 	@echo '        on/parallels (not implemented)     : Builds for Parallels virtual machines.'
 	@echo '        on/aws (not implemented)           : Builds for the AWS platform.'
 	@echo '        on/azure (not implemented)         : Builds for the Azure platform.'
-	@echo '     to/*
+	@echo '     to/*'
 	@echo '        to/local                           : Targets a local vagrant for push operations (vagrant box add)'
 	@echo '        to/vagrantup (not implemented)     : Targets vagrantup (remote) for push operations.'
 	@echo '      use/*'
