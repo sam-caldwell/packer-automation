@@ -2,6 +2,7 @@
 # Packer Build Automation
 #
 #
+-include Makefile.in/feature_flags.mk
 -include Makefile.in/setup.mk
 -include Makefile.in/packer.mk
 -include Makefile.in/vagrant-add-box.mk
@@ -38,7 +39,7 @@ help:
 	@echo ' '
 	@echo 'documentation: https://github.com/sam-caldwell/packer-automation'
 	@echo ' '
-
+k
 clean:
 	@echo "Cleaning..."
 	@rm -rf ./packer_cache &> /dev/null
