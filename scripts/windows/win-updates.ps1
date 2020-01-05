@@ -3,7 +3,7 @@ param($global:RestartRequired=0,
         $global:MaxCycles=5,
         $MaxUpdatesPerCycle=500)
 
-$Logfile = "C:\Windows\Temp\win-updates.log"
+$Logfile = "C:\windows\Temp\win-updates.log"
 
 function LogWrite {
    Param ([string]$logstring)
@@ -13,8 +13,8 @@ function LogWrite {
 }
 
 function Check-ContinueRestartOrEnd() {
-    $RegistryKey = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
-    $RegistryEntry = "InstallWindowsUpdates"
+    $RegistryKey = "HKLM:\SOFTWARE\Microsoft\windows\CurrentVersion\Run"
+    $RegistryEntry = "InstallwindowsUpdates"
     switch ($global:RestartRequired) {
         0 {
             $prop = (Get-ItemProperty $RegistryKey).$RegistryEntry
@@ -24,15 +24,15 @@ function Check-ContinueRestartOrEnd() {
             }
 
             LogWrite "No Restart Required"
-            Check-WindowsUpdates
+            Check-windowsUpdates
 
             if (($global:MoreUpdates -eq 1) -and ($script:Cycles -le $global:MaxCycles)) {
-                Install-WindowsUpdates
+                Install-windowsUpdates
             } elseif ($script:Cycles -gt $global:MaxCycles) {
                 LogWrite "Exceeded Cycle Count - Stopping"
                 Invoke-Expression "a:\openssh.ps1 -AutoStart"
             } else {
-                LogWrite "Done Installing Windows Updates"
+                LogWrite "Done Installing windows Updates"
                 Invoke-Expression "a:\openssh.ps1 -AutoStart"
             }
         }
@@ -40,7 +40,7 @@ function Check-ContinueRestartOrEnd() {
             $prop = (Get-ItemProperty $RegistryKey).$RegistryEntry
             if (-not $prop) {
                 LogWrite "Restart Registry Entry Does Not Exist - Creating It"
-                Set-ItemProperty -Path $RegistryKey -Name $RegistryEntry -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File $($script:ScriptPath) -MaxUpdatesPerCycle $($MaxUpdatesPerCycle)"
+                Set-ItemProperty -Path $RegistryKey -Name $RegistryEntry -Value "C:\windows\System32\windowsPowerShell\v1.0\powershell.exe -File $($script:ScriptPath) -MaxUpdatesPerCycle $($MaxUpdatesPerCycle)"
             } else {
                 LogWrite "Restart Registry Entry Exists Already"
             }
@@ -55,7 +55,7 @@ function Check-ContinueRestartOrEnd() {
     }
 }
 
-function Install-WindowsUpdates() {
+function Install-windowsUpdates() {
     $script:Cycles++
     LogWrite "Evaluating Available Updates with limit of $($MaxUpdatesPerCycle):"
     $UpdatesToDownload = New-Object -ComObject 'Microsoft.Update.UpdateColl'
@@ -161,15 +161,15 @@ function Install-WindowsUpdates() {
     Check-ContinueRestartOrEnd
 }
 
-function Check-WindowsUpdates() {
-    LogWrite "Checking For Windows Updates"
+function Check-windowsUpdates() {
+    LogWrite "Checking For windows Updates"
     $Username = $env:USERDOMAIN + "\" + $env:USERNAME
 
-    New-EventLog -Source $ScriptName -LogName 'Windows Powershell' -ErrorAction SilentlyContinue
+    New-EventLog -Source $ScriptName -LogName 'windows Powershell' -ErrorAction SilentlyContinue
 
     $Message = "Script: " + $ScriptPath + "`nScript User: " + $Username + "`nStarted: " + (Get-Date).toString()
 
-    Write-EventLog -LogName 'Windows Powershell' -Source $ScriptName -EventID "104" -EntryType "Information" -Message $Message
+    Write-EventLog -LogName 'windows Powershell' -Source $ScriptName -EventID "104" -EntryType "Information" -Message $Message
     LogWrite $Message
 
     $script:UpdateSearcher = $script:UpdateSession.CreateUpdateSearcher()
@@ -218,15 +218,15 @@ function Check-WindowsUpdates() {
 $script:ScriptName = $MyInvocation.MyCommand.ToString()
 $script:ScriptPath = $MyInvocation.MyCommand.Path
 $script:UpdateSession = New-Object -ComObject 'Microsoft.Update.Session'
-$script:UpdateSession.ClientApplicationID = 'Packer Windows Update Installer'
+$script:UpdateSession.ClientApplicationID = 'Packer windows Update Installer'
 $script:UpdateSearcher = $script:UpdateSession.CreateUpdateSearcher()
 $script:SearchResult = New-Object -ComObject 'Microsoft.Update.UpdateColl'
 $script:Cycles = 0
 $script:CycleUpdateCount = 0
 
-Check-WindowsUpdates
+Check-windowsUpdates
 if ($global:MoreUpdates -eq 1) {
-    Install-WindowsUpdates
+    Install-windowsUpdates
 } else {
     Check-ContinueRestartOrEnd
 }

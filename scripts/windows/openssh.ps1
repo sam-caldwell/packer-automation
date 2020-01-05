@@ -11,11 +11,11 @@ $ssh_download_url = "https://www.mls-software.com/files/setupssh-8.1p1-1.exe"
 
 if (!(Test-Path "C:\Program Files\OpenSSH\bin\ssh.exe")) {
     Write-Output "Downloading $ssh_download_url"
-    (New-Object System.Net.WebClient).DownloadFile($ssh_download_url, "C:\Windows\Temp\openssh.exe")
+    (New-Object System.Net.WebClient).DownloadFile($ssh_download_url, "C:\windows\Temp\openssh.exe")
 
     # initially set the port to 2222 so that there is not a race
     # condition in which packer connects to SSH before we can disable the service
-    Start-Process "C:\Windows\Temp\openssh.exe" "/S /port=2222 /privsep=1 /password=D@rj33l1ng" -NoNewWindow -Wait
+    Start-Process "C:\windows\Temp\openssh.exe" "/S /port=2222 /privsep=1 /password=D@rj33l1ng" -NoNewWindow -Wait
 }
 
 Stop-Service "OpenSSHd" -Force
@@ -23,9 +23,9 @@ Stop-Service "OpenSSHd" -Force
 # ensure vagrant can log in
 Write-Output "Setting vagrant user file permissions"
 New-Item -ItemType Directory -Force -Path "C:\Users\vagrant\.ssh"
-C:\Windows\System32\icacls.exe "C:\Users\vagrant" /grant "vagrant:(OI)(CI)F"
-C:\Windows\System32\icacls.exe "C:\Program Files\OpenSSH\bin" /grant "vagrant:(OI)RX"
-C:\Windows\System32\icacls.exe "C:\Program Files\OpenSSH\usr\sbin" /grant "vagrant:(OI)RX"
+C:\windows\System32\icacls.exe "C:\Users\vagrant" /grant "vagrant:(OI)(CI)F"
+C:\windows\System32\icacls.exe "C:\Program Files\OpenSSH\bin" /grant "vagrant:(OI)RX"
+C:\windows\System32\icacls.exe "C:\Program Files\OpenSSH\usr\sbin" /grant "vagrant:(OI)RX"
 
 Write-Output "Setting SSH home directories"
     (Get-Content "C:\Program Files\OpenSSH\etc\passwd") |
@@ -55,15 +55,15 @@ Write-Output "Removing ed25519 key as Vagrant net-ssh 2.9.1 does not support it"
 Remove-Item -Force -ErrorAction SilentlyContinue "C:\Program Files\OpenSSH\etc\ssh_host_ed25519_key"
 Remove-Item -Force -ErrorAction SilentlyContinue "C:\Program Files\OpenSSH\etc\ssh_host_ed25519_key.pub"
 
-# use c:\Windows\Temp as /tmp location
+# use c:\windows\Temp as /tmp location
 Write-Output "Setting temp directory location"
 Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "C:\Program Files\OpenSSH\tmp"
-C:\Program` Files\OpenSSH\bin\junction.exe /accepteula "C:\Program Files\OpenSSH\tmp" "C:\Windows\Temp"
-C:\Windows\System32\icacls.exe "C:\Windows\Temp" /grant "vagrant:(OI)(CI)F"
+C:\Program` Files\OpenSSH\bin\junction.exe /accepteula "C:\Program Files\OpenSSH\tmp" "C:\windows\Temp"
+C:\windows\System32\icacls.exe "C:\windows\Temp" /grant "vagrant:(OI)(CI)F"
 
 # add 64 bit environment variables missing from SSH
 Write-Output "Setting SSH environment"
-$sshenv = "TEMP=C:\Windows\Temp"
+$sshenv = "TEMP=C:\windows\Temp"
 if ($is_64bit) {
     $env_vars = "ProgramFiles(x86)=C:\Program Files (x86)", `
         "ProgramW6432=C:\Program Files", `
@@ -75,7 +75,7 @@ Set-Content C:\Users\vagrant\.ssh\environment $sshenv
 
 # record the path for provisioners (without the newline)
 Write-Output "Recording PATH for provisioners"
-Set-Content C:\Windows\Temp\PATH ([byte[]][char[]] $env:PATH) -Encoding Byte
+Set-Content C:\windows\Temp\PATH ([byte[]][char[]] $env:PATH) -Encoding Byte
 
 # configure firewall
 Write-Output "Configuring firewall"

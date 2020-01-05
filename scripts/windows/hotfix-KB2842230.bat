@@ -4,13 +4,13 @@
 :: See https://www.catalog.update.microsoft.com/Search.aspx?q=2842230
 ::::::::::::
 
-:: Windows 8 / Windows 2012 require KB2842230 hotfix
-:: The Windows Remote Management (WinRM) service does not use the customized value of the MaxMemoryPerShellMB quota.
+:: windows 8 / windows 2012 require KB2842230 hotfix
+:: The windows Remote Management (WinRM) service does not use the customized value of the MaxMemoryPerShellMB quota.
 :: Instead, the WinRM service uses the default value, which is 150 MB. 
-:: http://hotfixv4.microsoft.com/Windows%208%20RTM/nosp/Fix452763/9200/free/463941_intl_x64_zip.exe
+:: http://hotfixv4.microsoft.com/windows%208%20RTM/nosp/Fix452763/9200/free/463941_intl_x64_zip.exe
 
 ::@echo off
-::set hotfix="C:\Windows\Temp\Windows8-RT-KB2842230-x64.msu"
+::set hotfix="C:\windows\Temp\windows8-RT-KB2842230-x64.msu"
 ::if not exist %hotfix% goto :eof
 
 :::: get windows version

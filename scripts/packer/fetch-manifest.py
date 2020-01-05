@@ -92,11 +92,14 @@ def read_manifest(manifest_file: str, section: str) -> dict:
         :param section: str
         :return: dict
     """
+
     with open(manifest_file, 'r') as f:
         yaml_data = yaml.load(f, Loader=yaml.FullLoader)
+
         if section not in yaml_data:
             print(f"ERROR: Section ({section}) not found in manifest.")
             exit(1)
+
         return yaml_data[section]
 
 
@@ -111,6 +114,7 @@ def create_target_dir(base_dir: str, asset_dir: str) -> str:
     target_dir = join(base_dir, asset_dir)
     if not exists(target_dir):
         mkdir(target_dir)
+
     return target_dir
 
 
@@ -123,7 +127,9 @@ def verify_file_hash(file_hash: str, alg: str, filename: str) -> None:
         :param filename: str
         :return: None
     """
-    pass
+    cmd = [
+        "mc5"
+    ]
 
 
 def download_assets(manifest: dict, asset_cache_dir: str, asset_type: str,
