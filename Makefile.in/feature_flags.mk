@@ -43,4 +43,3 @@ to/local:
 to/vagrantup:
 	@echo 'enabling push to/vagrantup feature flag'
 	$(eval export PUSH_TO_VAGRANTUP=1)
-
