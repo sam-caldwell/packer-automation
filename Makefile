@@ -6,6 +6,7 @@
 -include Makefile.in/push.mk
 -include Makefile.in/setup.mk
 -include Makefile.in/packer.mk
+-include Makefile.in/fetch-all.mk
 -include Makefile.in/windows/Makefile
 -include Makefile.in/macos/Makefile
 -include Makefile.in/linux/Makefile
@@ -19,8 +20,15 @@ help:
 	@echo ' '
 	@echo 'Usage'
 	@echo ' '
-	@echo 'make setup     : ...to setup your local environment (from scratch).'
-	@echo 'make list      : ...to list the available boxes you can build.'
+	@echo 'make setup                     :  ...to setup your local environment (from scratch).'
+	@echo 'make list                      :  ...to list the available boxes you can build.'
+	@echo 'make fetch/all                 :  ...to fetch all assets (fetch-*)
+	@echo 'make fetch/iso                 :  ...to fetch the iso files listed in assetts/manifest.yml.'
+	@echo 'make fetch/windows             :  ...to fetch the windows files listed in assetts/manifest.yml.'
+	@echo 'make fetch/linux/deb           :  ...to fetch the linux/deb files listed in assetts/manifest.yml.'
+	@echo 'make fetch/linux/rpm           :  ...to fetch the linux/rpm files listed in assetts/manifest.yml.'
+	@echo 'make fetch/linux/src           :  ...to fetch the linux/src files listed in assetts/manifest.yml.'
+	@echo 'make fetch/macos               :  ...to fetch the macos files listed in assetts/manifest.yml.'
 	@echo ' '
 	@echo 'make [feature-flags] clean     : ...to clean up old boxes, run...'
 	@echo 'make [feature-flags] list-boxes: ...to list the boxes we have built.'
