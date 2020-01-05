@@ -3,9 +3,9 @@
 #
 #
 -include Makefile.in/feature_flags.mk
+-include Makefile.in/push.mk
 -include Makefile.in/setup.mk
 -include Makefile.in/packer.mk
--include Makefile.in/vagrant-add-box.mk
 -include Makefile.in/windows/Makefile
 -include Makefile.in/macos/Makefile
 -include Makefile.in/linux/Makefile
@@ -25,17 +25,23 @@ help:
 	@echo 'make [feature-flags] clean     : ...to clean up old boxes, run...'
 	@echo 'make [feature-flags] list-boxes: ...to list the boxes we have built.'
 	@echo 'make [feature-flags] <opsys>   : ...to create a box with the given operating system config.'
-	@echo 'make [feature-flags] add-local : ...to run vagrant box add and add your machines to your local vagrant.'
+	@echo 'make [feature-flags] push      : ...to push the set of all boxes created to local/remote stores.'
 	@echo ' '
 	@echo '   feature-flags:'
-	@echo '      on/virtualbox (not implemented)'
-	@echo '      on/vmware (not implemented)'
-	@echo '      on/parallels (not implemented)'
-	@echo '      on/aws (not implemented)'
-	@echo '      on/azure (not implemented)'
-	@echo '      to/vagrantup (not implemented)'
+	@echo '     on/*
+	@echo '        on/virtualbox                      : Builds for Virtualbox virtual machines.'
+	@echo '        on/vmware (not implemented)        : Builds for VMware virtual machines.'
+	@echo '        on/parallels (not implemented)     : Builds for Parallels virtual machines.'
+	@echo '        on/aws (not implemented)           : Builds for the AWS platform.'
+	@echo '        on/azure (not implemented)         : Builds for the Azure platform.'
+	@echo '     to/*
+	@echo '        to/local                           : Targets a local vagrant for push operations (vagrant box add)'
+	@echo '        to/vagrantup (not implemented)     : Targets vagrantup (remote) for push operations.'
+	@echo '      use/*'
+	@echo '        use/force                          : Adds --force to be used in commands.'
 	@echo ' '
-	@echo 'make all       : ...to make clean and run against all your boxes. (and probably heat your home).'
+	@echo 'make [feature-flags] all                   : ...to make clean and run against all your boxes.'
+	@echo '                                           :    (and probably heat your home).'
 	@echo ' '
 	@echo 'documentation: https://github.com/sam-caldwell/packer-automation'
 	@echo ' '
