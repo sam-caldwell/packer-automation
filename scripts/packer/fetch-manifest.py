@@ -118,18 +118,67 @@ def create_target_dir(base_dir: str, asset_dir: str) -> str:
     return target_dir
 
 
-def verify_file_hash(file_hash: str, alg: str, filename: str) -> None:
+def get_hash_validation_cmd(alg: str, filename: str) -> list:
+    """
+        return the
+    :param alg: str
+    :param filename: str
+    :return: list
+    """
+    if alg == 'md5':
+        return ["/sbin/md5", filename, "|", "/usr/bin/awk", "'{print $4}'"]
+    elif alg == 'sha1':
+        return ["shasum", "-a", "1", filename, "|", "awk", "'{print $1}'"]
+    elif alg == 'sha256':
+        return ["shasum", "-a", "256", filename, "|", "awk", "'{print $1}'"]
+    elif alg == 'sha512':
+        return ["shasum", "-a", "512", filename, "|", "awk", "'{print $1}'"]
+    else:
+        print(f"unknown or unsupported algorithm: {alg} on {filename}")
+        exit(1)
+
+
+def verify_file_hash(filename: str, expected_hash: str, alg: str,
+                     verify: bool = False) -> None:
     """
         Verify the filename has the expected hash.
 
-        :param file_hash: str
-        :param alg: str
         :param filename: str
+        :param expected_hash: str
+        :param alg: str
+        :param verify: bool
         :return: None
     """
-    cmd = [
-        "mc5"
-    ]
+    if verify:
+        if alg == 'md5':
+            f = ["/sbin/md5", filename], 3
+        elif alg == 'sha1':
+            f = ["shasum", "-a", "1", filename], 0
+        elif alg == 'sha256':
+            f = ["shasum", "-a", "256", filename], 0
+        elif alg == 'sha512':
+            f = ["shasum", "-a", "512", filename], 0
+        else:
+            print(f"unknown or unsupported algorithm: {alg} on {filename}")
+            exit(1)
+
+        print("computing actual hash...")
+        with Popen(f[0], stdout=PIPE) as p:
+            p.wait()
+            print("evaluating results.")
+            actual = p.stdout.read() \
+                .decode(encoding='utf-8') \
+                .strip(' ') \
+                .split(' ')[f[1]]
+            if expected_hash.strip() != actual.strip():
+                print(f"Hash mismatch  : {filename}")
+                print(f"\tactual_hash  : {actual}")
+                print(f"\texpected_hash: {expected_hash}")
+                exit(1)
+            else:
+                print("hash verified.")
+    else:
+        print(f"{filename} hash not verified.")
 
 
 def download_assets(manifest: dict, asset_cache_dir: str, asset_type: str,
@@ -153,13 +202,16 @@ def download_assets(manifest: dict, asset_cache_dir: str, asset_type: str,
 
         print(f"Loading group: {group_name}")
         url = data["url"]
-        file_hash = data["hash"]
-        alg = data["alg"]
-
         filename = join(target_dir, group_name) + ".iso"
+        verify_hash = data.get("verify_hash") or False
+        if verify_hash:
+            print("verify_hash: true")
+            alg, file_hash = data["alg"], data["hash"]
+        else:
+            print("verify_hash: false")
+            alg, file_hash = "", ""
 
         if exists(filename):
-
             if force:
                 print(f"{filename} exists.  But --force requires delete "
                       f"and download of the asset..")
@@ -169,6 +221,11 @@ def download_assets(manifest: dict, asset_cache_dir: str, asset_type: str,
                     exit(1)
             else:
                 print(f"{filename} exists.  not downloading.")
+                verify_file_hash(
+                    expected_hash=file_hash,
+                    alg=alg,
+                    filename=filename,
+                    verify=verify_hash)
                 continue
 
         cmd = ["/usr/bin/curl", "--fail", "--create-dir", "--output",
@@ -182,7 +239,11 @@ def download_assets(manifest: dict, asset_cache_dir: str, asset_type: str,
         if exists(filename):
 
             print(f"{filename} downloaded successfully.")
-            verify_file_hash(file_hash, alg, filename)
+            verify_file_hash(
+                expected_hash=file_hash,
+                alg=alg,
+                filename=filename,
+                verify=verify_hash)
 
         else:
 
