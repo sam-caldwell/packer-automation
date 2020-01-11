@@ -1,4 +1,4 @@
-push:
+push/boxes:
 	@echo 'push-to local:${PUSH_TO_LOCAL} vagrantup:${PUSH_TO_VAGRANTUP}'
 	@if [ "$(PUSH_TO_LOCAL)" = "1" ]; then $(MAKE) push-to-local; fi
 	@if [ "$(PUSH_TO_VAGRANTUP)" = "1" ]; then $(MAKE) push-to-vagrantup; fi
