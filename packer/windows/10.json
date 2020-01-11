@@ -21,18 +21,8 @@
         "./scripts/windows/openssh.ps1"
       ],
       "vboxmanage": [
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--memory",
-          "{{user `memory_size`}}"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--cpus",
-          "{{user `cpus`}}"
-        ]
+        ["modifyvm", "{{.Name}}", "--memory", "{{user `memory_size`}}"],
+        ["modifyvm", "{{.Name}}", "--cpus", "{{user `cpus`}}"]
       ]
     }
   ],
@@ -57,18 +47,19 @@
     {
       "type": "vagrant",
       "keep_input_artifact": false,
-      "output": "./box/windows_10_{{.Provider}}.box",
+      "output": "./box/{{.Provider}}/windows/10.box",
       "vagrantfile_template": "./vagrant/windows/10.template"
     }
   ],
-  "variables": {
-    "iso_url": "http://download.microsoft.com/download/C/3/9/C399EEA8-135D-4207-92C9-6AAB3259F6EF/10240.16384.150709-1700.TH1_CLIENTENTERPRISEEVAL_OEMRET_X64FRE_EN-US.ISO",
-    "iso_checksum_type": "sha1",
-    "iso_checksum": "56ab095075be28a90bc0b510835280975c6bb2ce",
+"variables": {
+    "iso_url": "./assets/iso/windows/10.iso",
+    "iso_checksum_type": "md5",
+    "iso_checksum": "6cd2f47f2c32faa7be85f1dc81af3220",
     "autounattend": "./answer_files/windows/10/Autounattend.xml",
     "headless": "true",
     "cpus": "2",
     "memory_size": "2048",
-    "disk_size": "61440"
+    "disk_size": "61440",
+    "feature_install_script":"./scripts/windows/core/null.bat"
   }
 }

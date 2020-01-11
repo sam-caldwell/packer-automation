@@ -11,15 +11,23 @@
 /output-virtualbox/
 /output-virtualbox-iso/
 /output-virtualbox-ovf/
-/*.box
 /packer_cache/
 
+
+*.box
+
+*.tar
+*.tar.xz
 *.tar.gz
+*.tar.bz
+*.tar.bz2
+*.tar.bzip2
+
 *.zip
 *.dmg
 *.deb
 *.rpm
 *.7z
-*.msi
+*.ms[iu]
 
 *.py[co]
