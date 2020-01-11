@@ -54,18 +54,8 @@
         "./scripts/windows/openssh.ps1"
       ],
       "vboxmanage": [
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--memory",
-          "{{user `memory_size`}}"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--cpus",
-          "{{user `cpus`}}"
-        ]
+        ["modifyvm", "{{.Name}}", "--memory", "{{user `memory_size`}}"],
+        ["modifyvm", "{{.Name}}", "--cpus", "{{user `cpus`}}"]
       ]
     },
     {
@@ -89,26 +79,11 @@
         "./scripts/windows/openssh.ps1"
       ],
       "prlctl": [
-        [
-          "set", "{{.Name}}",
-          "--memsize", "{{user `memory_size`}}"
-        ],
-        [
-          "set", "{{.Name}}",
-          "--cpus", "{{user `cpus`}}"
-        ],
-        [
-          "set", "{{.Name}}",
-          "--winsystray-in-macmenu", "off"
-        ],
-        [
-          "set", "{{.Name}}",
-          "--startup-view", "window"
-        ],
-        [
-          "set", "{{.Name}}",
-          "--efi-boot", "off"
-        ]
+        ["set", "{{.Name}}", "--memsize", "{{user `memory_size`}}"],
+        ["set", "{{.Name}}", "--cpus", "{{user `cpus`}}"],
+        ["set", "{{.Name}}", "--winsystray-in-macmenu", "off"],
+        ["set", "{{.Name}}", "--startup-view", "window"],
+        ["set", "{{.Name}}", "--efi-boot", "off"]
       ]
     }
   ],
