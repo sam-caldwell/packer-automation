@@ -133,7 +133,7 @@
     }
   ],
   "variables": {
-    "iso_url": "http://download.microsoft.com/download/F/7/D/F7DF966B-5C40-4674-9A32-D83D869A3244/9600.16384.WINBLUE_RTM.130821-1623_X64FRE_SERVERHYPERCORE_EN-US-IRM_SHV_X64FRE_EN-US_DV5.ISO",
+    "iso_url": "./assets/iso/windows/2012.iso",
     "iso_checksum_type": "md5",
     "iso_checksum": "9c9e0d82cb6301a4b88fd2f4c35caf80",
     "autounattend": "./answer_files/windows/2012_r2_hyperv/Autounattend.xml",

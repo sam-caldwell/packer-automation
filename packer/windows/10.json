@@ -39,6 +39,7 @@
         "./scripts/windows/compile-dotnet-assemblies.bat",
         "./scripts/windows/install7z.bat",
         "./scripts/windows/installSdelete.bat",
+        "{{user `feature_install_script`}}",
         "./scripts/windows/compact.bat"
       ]
     }
@@ -60,6 +61,6 @@
     "cpus": "2",
     "memory_size": "2048",
     "disk_size": "61440",
-    "feature_install_script":"./scripts/windows/core/null.bat"
+    "feature_install_script":"./scripts/windows/null.bat"
   }
 }
