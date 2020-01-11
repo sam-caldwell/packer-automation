@@ -38,7 +38,7 @@
         "./scripts/windows/disable-auto-logon.bat",
         "./scripts/windows/enable-rdp.bat",
         "./scripts/windows/compile-dotnet-assemblies.bat",
-        "./scripts/windows/chocolatey.ps1",
+        "./scripts/windows/install_chocolatey.bat",
         "{{user `feature_install_script`}}",
         "./scripts/windows/install7z.bat",
         "./scripts/windows/installSdelete.bat",
