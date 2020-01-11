@@ -1,6 +1,7 @@
 {
   "builders": [
     {
+      "name": "vmware",
       "type": "vmware-iso",
       "iso_url": "{{user `iso_url`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -31,6 +32,7 @@
       }
     },
     {
+      "name": "virtualbox",
       "type": "virtualbox-iso",
       "iso_url": "{{user `iso_url`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -55,6 +57,7 @@
       ]
     },
     {
+      "name": "parallels",
       "type": "parallels-iso",
       "iso_url": "{{user `iso_url`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
