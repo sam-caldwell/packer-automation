@@ -123,7 +123,7 @@
     "autounattend": "./answer_files/windows/7/Autounattend.xml",
     "headless": "true",
     "cpus": "2",
-    "memory_size": "2048",
+    "memory_size": "4096",
     "disk_size": "61440"
   }
 }
