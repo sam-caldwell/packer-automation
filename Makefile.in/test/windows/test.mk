@@ -1,16 +1,17 @@
 #
 # windows/test.mk
 #
--include 7/test.mk
--include 81/test.mk
--include 2008/test.mk
--include 2012/test.mk
--include 2016/test.mk
+-include Makefile.in/test/windows/7/test.mk
+-include Makefile.in/test/windows/81/test.mk
+-include Makefile.in/test/windows/2008/test.mk
+-include Makefile.in/test/windows/2012/test.mk
+-include Makefile.in/test/windows/2016/test.mk
 
-test/windows/main:
-	@echo 'tests for windows are not implemented yet.'
-	exit 1
-
-test:
-	@echo 'testing $(OS)'
-	exit 1
+test/windows:
+	@echo "running all windows tests."
+	@$(MAKE) test/windows/7
+	@$(MAKE) test/windows/81
+	@$(MAKE) test/windows/10
+	@$(MAKE) test/windows/2008
+	@$(MAKE) test/windows/2012
+	@$(MAKE) test/windows/2016

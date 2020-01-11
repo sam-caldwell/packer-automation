@@ -36,7 +36,7 @@ help:
 	@echo 'make fetch/linux/src             :  ...to fetch the linux/src files listed in assetts/manifest.yml.'
 	@echo 'make fetch/macos                 :  ...to fetch the macos files listed in assetts/manifest.yml.'
 	@echo 'make push/assets                 :  ...to push the assets cache to the remote s3 bucket.'
-	@echo 'make OS="<opsys>" test           :  ...to use vagrant to test a local box for the given opsys string.'
+	@echo 'make test/<opsys>                :  ...to use vagrant to test a local box for the given opsys string.'
 	@echo '                                       where 'opsys' is 'windows/10' or macos/highsierra, etc.'
 	@echo ' '
 	@echo 'make [feature-flags] clean       :  ...to clean up old boxes, run...'

@@ -1,3 +1,3 @@
-test/linux/main:
-	@echo 'macos test main: tests are not implemented for macos yet.'
-	exit 1
+test/macos:
+	@echo 'running all macos tests.'
+	@echo '***NO MACOS TESTS ARE IMPLEMENTED***'
