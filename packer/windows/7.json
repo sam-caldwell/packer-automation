@@ -1,6 +1,7 @@
 {
   "builders": [
     {
+      "name": "vmware",
       "type": "vmware-iso",
       "iso_url": "{{user `iso_url`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -33,6 +34,7 @@
       }
     },
     {
+      "name": "virtualbox",
       "type": "virtualbox-iso",
       "iso_url": "{{user `iso_url`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -59,6 +61,7 @@
       ]
     },
     {
+      "name": "parallels",
       "type": "parallels-iso",
       "iso_url": "{{user `iso_url`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -106,6 +109,7 @@
   ],
   "post-processors": [
     {
+      "name": "vagrant",
       "type": "vagrant",
       "keep_input_artifact": false,
       "output": "windows_7_{{.Provider}}.box",
