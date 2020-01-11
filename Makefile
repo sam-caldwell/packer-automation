@@ -1,19 +1,20 @@
 #
 # Packer Build Automation
 #
-#
 -include Makefile.in/feature_flags.mk
-
+-include Makefile.in/list.mk
+-include Makefile.in/clean.mk
 -include Makefile.in/setup.mk
 -include Makefile.in/build.mk
 -include Makefile.in/linters.mk
+-include Makefile.in/test/test.mk
 -include Makefile.in/fetch-all.mk
+-include Makefile.in/list-boxes.mk
 -include Makefile.in/push/push-boxes.mk
 -include Makefile.in/push/push-assets.mk
 -include Makefile.in/macos/Makefile
 -include Makefile.in/linux/Makefile
 -include Makefile.in/windows/Makefile
-
 
 PATH += $HOME/.bin
 
@@ -34,12 +35,14 @@ help:
 	@echo 'make fetch/linux/rpm             :  ...to fetch the linux/rpm files listed in assetts/manifest.yml.'
 	@echo 'make fetch/linux/src             :  ...to fetch the linux/src files listed in assetts/manifest.yml.'
 	@echo 'make fetch/macos                 :  ...to fetch the macos files listed in assetts/manifest.yml.'
-	@echo 'make push/assets                 : ...to push the assets cache to the remote s3 bucket.'
+	@echo 'make push/assets                 :  ...to push the assets cache to the remote s3 bucket.'
+	@echo 'make OS="<opsys>" test           :  ...to use vagrant to test a local box for the given opsys string.'
+	@echo '                                       where 'opsys' is 'windows/10' or macos/highsierra, etc.'
 	@echo ' '
-	@echo 'make [feature-flags] clean       : ...to clean up old boxes, run...'
-	@echo 'make [feature-flags] list-boxes  : ...to list the boxes we have built.'
-	@echo 'make [feature-flags] <opsys>     : ...to create a box with the given operating system config.'
-	@echo 'make [feature-flags] push/box    : ...to push the set of all boxes created to local/remote stores.'
+	@echo 'make [feature-flags] clean       :  ...to clean up old boxes, run...'
+	@echo 'make [feature-flags] list-boxes  :  ...to list the boxes we have built.'
+	@echo 'make [feature-flags] <opsys>     :  ...to create a box with the given operating system config.'
+	@echo 'make [feature-flags] push/box    :  ...to push the set of all boxes created to local/remote stores.'
 	@echo ' '
 	@echo '   feature-flags:'
 	@echo '     on/*'
@@ -60,27 +63,7 @@ help:
 	@echo 'documentation: https://github.com/sam-caldwell/packer-automation'
 	@echo ' '
 
-clean:
-	@echo "Cleaning..."
-	@rm -rf ./packer_cache &> /dev/null
-	@rm -rf ./output-virtualbox* &> /dev/null
-	@rm -rf ./output-vmware &> /dev/null
-	@rm -rf ./output-parallels &> /dev/null
-	@rm -rf ./packer_cache &> /dev/null
-	@rm -rf ./box/ &> /dev/null
-	@mkdir -p ./box/{windows,macos,linux}
-
-list:
-	@find ./packer/ -name "*.json" -type f | sed -e 's/\.\/packer\/\//- /' | sed -e 's/\.json//' | sort
-
-list-boxes:
-	@find ./box/ -name "*.box" -type f | sed -e 's/\.\/box\/\//- /' | sed -e 's/\.box//' | sort
-
-hash:
-	@rm ./iso/hashes.txt
-	@find ./iso/ -name "*.iso" -type f -exec shasum -a 1 {}  >> ./iso/hashes.txt \;
-
-.PHONY: all
 all:
-	@echo 'Executing everything...this is gonna take a long time.'
+	@echo "Doing a 'make all' in this project would be a very bad idea unless you were running this on a gibson."
+	exit 1
 
