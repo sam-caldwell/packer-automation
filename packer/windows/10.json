@@ -1,6 +1,7 @@
 {
   "builders": [
     {
+      "name": "virtualbox",
       "type": "virtualbox-iso",
       "iso_url": "{{user `iso_url`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
