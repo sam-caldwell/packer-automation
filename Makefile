@@ -42,7 +42,7 @@ help:
 	@echo 'make [feature-flags] clean       :  ...to clean up old boxes, run...'
 	@echo 'make [feature-flags] list-boxes  :  ...to list the boxes we have built.'
 	@echo 'make [feature-flags] <opsys>     :  ...to create a box with the given operating system config.'
-	@echo 'make [feature-flags] push/box    :  ...to push the set of all boxes created to local/remote stores.'
+	@echo 'make [feature-flags] push/boxes  :  ...to push the set of all boxes created to local/remote stores.'
 	@echo ' '
 	@echo '   feature-flags:'
 	@echo '     on/*'
