@@ -95,6 +95,8 @@
         "./scripts/windows/vagrant-ssh.bat",
         "./scripts/windows/enable-rdp.bat",
         "./scripts/windows/compile-dotnet-assemblies.bat",
+        "./scripts/windows/install_chocolatey.bat",
+        "{{user `feature_install_script`}}",
         "./scripts/windows/disable-auto-logon.bat",
         "./scripts/windows/install7z.bat",
         "./scripts/windows/installSdelete.bat",
@@ -114,6 +116,7 @@
     "iso_url": "./assets/iso/windows/2016.iso",
     "iso_checksum_type": "md5",
     "iso_checksum": "70721288bbcdfe3239d8f8c0fae55f1f",
-    "autounattend": "./answer_files/windows/2016/Autounattend.xml"
+    "autounattend": "./answer_files/windows/2016/Autounattend.xml",
+    "feature_install_script":"./scripts/windows/null.bat"
   }
 }

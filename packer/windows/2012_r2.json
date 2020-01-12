@@ -95,6 +95,8 @@
         "./scripts/windows/vagrant-ssh.bat",
         "./scripts/windows/enable-rdp.bat",
         "./scripts/windows/compile-dotnet-assemblies.bat",
+        "./scripts/windows/install_chocolatey.bat",
+        "{{user `feature_install_script`}}",
         "./scripts/windows/disable-auto-logon.bat",
         "./scripts/windows/install7z.bat",
         "./scripts/windows/installSdelete.bat",
@@ -118,6 +120,7 @@
     "headless": "true",
     "cpus": "2",
     "memory_size": "2048",
-    "disk_size": "61440"
+    "disk_size": "61440",
+    "feature_install_script":"./scripts/windows/null.bat"
   }
 }
