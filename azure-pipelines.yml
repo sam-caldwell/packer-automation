@@ -1,0 +1,24 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- version-2.0.1-develop
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: |
+    echo 'setup the environment.''
+    apt-get update -y --fix-missing
+    apt-get install --no-install-recommends -y make 
+    apt-get install --no-install-recommends -y packer
+  displayName: 'setup the environment.'
+- script: |
+    echo 'lint the project'
+    make lint
+
+
+
