@@ -12,9 +12,9 @@ pool:
 steps:
 - script: |
     echo 'setup the environment.'
-    apt-get update -y --fix-missing
-    apt-get install --no-install-recommends -y make 
-    apt-get install --no-install-recommends -y packer
+    sudo apt-get update -y --fix-missing
+    sudo apt-get install --no-install-recommends -y make
+    sudo apt-get install --no-install-recommends -y packer
   displayName: 'setup the environment.'
 - script: |
     echo 'lint the project'
