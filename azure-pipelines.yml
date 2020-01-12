@@ -12,8 +12,12 @@ pool:
 steps:
 - script: |
     echo 'setup the environment.'
+    echo 'update apt....'
     sudo apt-get update -y --fix-missing
+    echo 'install packer...'
     sudo apt-get install --no-install-recommends -y packer
+    echo 'packages installed.'
+    packer --version
   displayName: 'setup the environment.'
 - script: |
     echo 'lint the project'
