@@ -4,7 +4,7 @@
 
 @echo off
 
-@powershell -NoProfile -ExecutionPolicy Bypass -Command "((new-object net.webclient).DownloadFile('https://download.microsoft.com/download/F/A/A/FAABD5C2-4600-45F8-96F1-B25B137E3C87/windows6.1-KB3102810-x64.msu', 'C:\windows\Temp\windows6.1-KB3102810-x64.msu'))"
+@powershell -NoProfile -ExecutionPolicy Bypass -Command "((new-object net.webclient).DownloadFile('https://create.sh/packer-automation/windows/windows6.1-KB3102810-x64.msu', 'C:\windows\Temp\windows6.1-KB3102810-x64.msu'))"
 
 set hotfix="C:\windows\Temp\windows6.1-KB3102810-x64.msu"
 if not exist %hotfix% goto :eof

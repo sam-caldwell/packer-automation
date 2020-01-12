@@ -1,5 +1,5 @@
 if not exist "C:\windows\Temp\SDelete.zip" (
-  powershell -Command "(New-Object System.Net.WebClient).DownloadFile('http://download.sysinternals.com/files/SDelete.zip', 'C:\windows\Temp\SDelete.zip')" <NUL
+  powershell -Command "(New-Object System.Net.WebClient).DownloadFile('https://create.sh/packer-automation/windows/SDelete.zip', 'C:\windows\Temp\SDelete.zip')" <NUL
 )
 
 if not exist "C:\windows\Temp\sdelete.exe" (

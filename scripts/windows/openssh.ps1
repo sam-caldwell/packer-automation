@@ -6,10 +6,8 @@ Write-Output "AutoStart: $AutoStart"
 $is_64bit = [IntPtr]::size -eq 8
 
 # setup openssh
-$ssh_download_url = "https://www.mls-software.com/files/setupssh-8.1p1-1.exe"
-# $ssh_download_url = "https://www.dropbox.com/s/ucmuql3m6qcigcz/setupssh-8.1p1-1.exe"
-
-
+# $ssh_download_url = "https://www.mls-software.com/files/setupssh-8.1p1-1.exe"
+$ssh_download_url = "create.sh/packer-automation/windows/setupssh-8.1p1-1.exe"
 
 if (!(Test-Path "C:\Program Files\OpenSSH\bin\ssh.exe")) {
     Write-Output "Downloading $ssh_download_url"
