@@ -13,7 +13,6 @@ steps:
 - script: |
     echo 'setup the environment.'
     sudo apt-get update -y --fix-missing
-    sudo apt-get install --no-install-recommends -y make
     sudo apt-get install --no-install-recommends -y packer
   displayName: 'setup the environment.'
 - script: |
