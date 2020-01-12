@@ -15,9 +15,12 @@ steps:
     echo 'update apt....'
     sudo apt-get update -y --fix-missing
     echo 'install packer...'
-    sudo apt-get install --no-install-recommends -y packer
-    echo 'packages installed.'
-    packer --version
+    sudo apt-get install --no-install-recommends -y wget unzip
+    wget https://releases.hashicorp.com/packer/1.5.1/packer_1.5.1_linux_amd64.zip --output-document=packer.zip
+    unzip packer.zip
+    sudo mv packer /usr/bin/
+    echo 'wget installed.'
+
   displayName: 'setup the environment.'
 - script: |
     echo 'lint the project'
