@@ -1,5 +1,6 @@
 *.iml
 .idea/
+.vagrant
 
 .DS_Store
 /box/*.box
