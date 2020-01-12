@@ -1,7 +1,7 @@
 #
 # Packer Build Automation
 #
--include Makefile.in/feature_flags.mk
+
 -include Makefile.in/list.mk
 -include Makefile.in/clean.mk
 -include Makefile.in/setup.mk
@@ -10,11 +10,12 @@
 -include Makefile.in/test/test.mk
 -include Makefile.in/fetch-all.mk
 -include Makefile.in/list-boxes.mk
--include Makefile.in/push/push-boxes.mk
--include Makefile.in/push/push-assets.mk
 -include Makefile.in/macos/Makefile
 -include Makefile.in/linux/Makefile
 -include Makefile.in/windows/Makefile
+-include Makefile.in/feature_flags.mk
+-include Makefile.in/push/push-boxes.mk
+-include Makefile.in/push/push-assets.mk
 
 PATH += $HOME/.bin
 
@@ -65,5 +66,5 @@ help:
 
 all:
 	@echo "Doing a 'make all' in this project would be a very bad idea unless you were running this on a gibson."
-	exit 1
+	@exit 0
 

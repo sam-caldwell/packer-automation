@@ -9,6 +9,7 @@ windows/7:
 
 .PHONY: windows/10
 windows/10:
+	@echo 'windows/10 starting'
 	$(MAKE) PACKER_FILE="packer/windows/10.json" build
 
 .PHONY: windows/81
