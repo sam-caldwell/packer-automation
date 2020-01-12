@@ -103,7 +103,7 @@
         "./scripts/windows/compile-dotnet-assemblies.bat",
         "./scripts/windows/install7z.bat",
         "./scripts/windows/installSdelete.bat",
-        "./scripts/windows/compact.bat"
+        "./scripts/windows/win7_defrag.bat"
       ]
     }
   ],
