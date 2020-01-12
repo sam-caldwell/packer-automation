@@ -11,7 +11,7 @@ pool:
 
 steps:
 - script: |
-    echo 'setup the environment.''
+    echo 'setup the environment.'
     apt-get update -y --fix-missing
     apt-get install --no-install-recommends -y make 
     apt-get install --no-install-recommends -y packer
