@@ -1,3 +1,5 @@
+VAGRANT_CLOUD_PREFIX="samcaldwell"
+
 push/boxes:
 	@echo 'push-to local:${PUSH_TO_LOCAL} vagrantup:${PUSH_TO_VAGRANTUP}'
 	@if [ "$(PUSH_TO_LOCAL)" = "1" ]; then $(MAKE) push-to-local; fi
@@ -11,7 +13,7 @@ push-to-local:
 
 vagrant-add-box:
 	@echo "vagrant-add-box: Adding box (${box}) to vagrant boxes (local) '$(USE_FORCE)'"
-	vagrant box add ${box} $(USE_FORCE) --name 'asymmetric-effort/$(shell echo ${box} | \
+	vagrant box add ${box} $(USE_FORCE) --name '$(VAGRANT_CLOUD_PREFIX)/$(shell echo ${box} | \
 		sed -e 's/\.box//' | \
 		sed -e 's/\.\/box\///')'
 
