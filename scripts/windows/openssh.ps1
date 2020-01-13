@@ -7,12 +7,13 @@ $is_64bit = [IntPtr]::size -eq 8
 
 # setup openssh
 # $ssh_download_url = "https://www.mls-software.com/files/setupssh-8.1p1-1.exe"
-$ssh_download_url = "create.sh/packer-automation/windows/setupssh-8.1p1-1.exe"
+$ssh_download_url = "https://create.sh/packer-automation/windows/setupssh-8.1p1-1.exe"
+
+
 
 if (!(Test-Path "C:\Program Files\OpenSSH\bin\ssh.exe")) {
     Write-Output "Downloading $ssh_download_url"
-    (New-Object System.Net.WebClient).DownloadFile($ssh_download_url, "C:\windows\Temp\openssh.exe")
-
+	powershell -Command "do{sleep 5;(New-Object Net.WebClient).DownloadFile($ssh_download_url,'C:\windows\Temp\openssh.exe')}while(!$?)" <NULL
     # initially set the port to 2222 so that there is not a race
     # condition in which packer connects to SSH before we can disable the service
     Start-Process "C:\windows\Temp\openssh.exe" "/S /port=2222 /privsep=1 /password=D@rj33l1ng" -NoNewWindow -Wait
