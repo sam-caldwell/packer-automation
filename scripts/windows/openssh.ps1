@@ -12,8 +12,14 @@ $ssh_download_url = "https://create.sh/packer-automation/windows/setupssh-8.1p1-
 
 
 if (!(Test-Path "C:\Program Files\OpenSSH\bin\ssh.exe")) {
-    Write-Output "Downloading $ssh_download_url"
-	powershell -Command "do{sleep 5;(New-Object Net.WebClient).DownloadFile($ssh_download_url,'C:\windows\Temp\openssh.exe')}while(!$?)" <NULL
+    $attempt = 0
+    $max_attempts = 5
+	do {
+        sleep 5;
+        Write-Output "Attempt ($attempt) Downloading $ssh_download_url"
+        (New-Object Net.WebClient).DownloadFile($ssh_download_url,'C:\windows\Temp\openssh.exe')
+        $attempt = $attempt + 1
+    } while((!$?) and ($attempt < $max_attempts))" <NULL
     # initially set the port to 2222 so that there is not a race
     # condition in which packer connects to SSH before we can disable the service
     Start-Process "C:\windows\Temp\openssh.exe" "/S /port=2222 /privsep=1 /password=D@rj33l1ng" -NoNewWindow -Wait
