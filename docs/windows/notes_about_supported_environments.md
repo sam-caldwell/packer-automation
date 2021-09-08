@@ -28,7 +28,7 @@ Notes about Supported Windows Environments
 ## Windows Updates
 
 * The scripts in this repo will install all Windows updates – by default – 
-  during Windows Setup. This is a _very_ time consuming process, depending 
+  during Windows Setup. This is a _very_ time-consuming process, depending 
   on the age of the OS and the quantity of updates released since the last 
   service pack. You might want to do yourself a favor during development and 
   disable this functionality, by commenting out the `WITH WINDOWS UPDATES` 

@@ -23,8 +23,10 @@ See also...
 The intent of this section is to automate everything from setup to finish using a single `Makefile`.  
 The idea is to keep this elegant and easy to use.
 
-0. Run `make enable-<hypervisor>` where `<hypervisor>` may be `paralells`, `vmware` or `virtualbox`.  See `make list-hypervisors`
-1. Run `make setup` to install some [required software](docs/required_software.md).  
+0. Run `make enable-<hypervisor>` where `<hypervisor>` may be `paralells`, `vmware` or `virtualbox`.  
+   See `make list-hypervisors`  For example, if you use Parallels, execute `make enable-parallels` to
+   enable parallels.
+1. Then run `make setup` to install some [required software](docs/required_software.md).  
 2. From time to time, you'll want to reset the environment.  Use `make clean` to do this.
 3. Use `make help` to learn about the commands available in this system.
 
