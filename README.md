@@ -1,10 +1,11 @@
 # Packer Build Templates for Vagrant (Windows, MacOs, Linux)
 
-## Introduction
+## Objective
+* To create a single repository from which many different Vagrant boxes can be generated using [Hashicorp
+  Packer](http://www.packer.io).  This is a fork of the original Windows Packer template repo created 
+  by [Joe Fitzgerald](https://github.com/joefitzgerald/packer-windows). 
+* Provide support for various hypervisors and other platforms.
 
-This repository contains templates that can be used to create boxes for Vagrant using Packer ([Website](http://www.packer.io)) 
-([Github](http://github.com/mitchellh/packer)).  This is a fork of the original Windows Packer template repo created 
-by [Joe Fitzgerald](https://github.com/joefitzgerald/packer-windows). 
 
 ## Supported Operating Systems
 To see what systems are currently supported, run...
@@ -15,19 +16,16 @@ make list
 See also...
 
 * [Notes about Supported Windows Environments](./docs/windows/notes_about_supported_environments.md)
-
 * [Notes about Supported MacOs Environments](./docs/macos/notes_about_supported_environments.md)
-
 * [Notes about Supported Linux Environments](./docs/linux/notes_about_supported_environments.md)
  
 ## Getting Started
 The intent of this section is to automate everything from setup to finish using a single `Makefile`.  
 The idea is to keep this elegant and easy to use.
 
-1. Install some [required software](docs/required_software.md).  Run `make setup` and you're done.
-
+0. Run `make enable-<hypervisor>` where `<hypervisor>` may be `paralells`, `vmware` or `virtualbox`.  See `make list-hypervisors`
+1. Run `make setup` to install some [required software](docs/required_software.md).  
 2. From time to time, you'll want to reset the environment.  Use `make clean` to do this.
-
 3. Use `make help` to learn about the commands available in this system.
 
 #### Building Vagrant Boxes
@@ -44,7 +42,6 @@ make list
 #### Other Documentation
 
 * [Adding a New Environment (OpSys) to the Project](docs/adding_new_box.md)
-
 * [How to enable RSync for Windows Templates](docs/enable-rsync-for-windows-templates.md)
 
 
@@ -54,8 +51,7 @@ make list
 ### Acknowledgements
 
 * Thanks to [Joe Fitzgerald](https://github.com/joefitzgerald/packer-windows) for the work on his original 
-  repo which I am extending.  Joe, we've never met, but the next time you're in Austin, Texas, I owe you a 
-  breakfast taco for saving me a lot of work here.
+  repo which I am extending.
 
 * From the original repo by Joe Fitzgerald, we have the following acknowledgements:
 

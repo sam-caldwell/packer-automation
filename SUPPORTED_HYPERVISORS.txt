@@ -1,0 +1,4 @@
+parallels:enabled
+vmware: disabled
+virtualbox: disabled
+hyperv: disabled

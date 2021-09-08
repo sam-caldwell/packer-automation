@@ -1,0 +1,1 @@
+(c) 2018 Sam Caldwell <mail@samcaldwell.net>  MIT License.
