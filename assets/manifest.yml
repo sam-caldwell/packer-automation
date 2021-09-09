@@ -86,21 +86,21 @@ package:
         file: "kb3102810-x64.msu"
         hash: "ea00d526d57d37b6bb9fa788a4f72e145f929796249b7798d4d6a15b4c11a517"
         alg: "sha256"
-        verify_hash: false
+        verify_hash: true
         download: true
       sysinternals:
         url: "https://download.sysinternals.com/files/SysinternalsSuite.zip"
         file: "SysinternalsSuite.zip"
-        hash: ""
-        alg: ""
-        verify_hash: false
+        hash: "feb1b49634b674c74d65d5d32eb14c6f023913f14e875af5f58da11909e64d0f"
+        alg: "sha256"
+        verify_hash: true
         download: true
       vagrant:
         url: "https://releases.hashicorp.com/vagrant/2.2.6/vagrant_2.2.6_x86_64.msi"
         file: "vagrant.msi"
         hash: "4e9d2617dc2e1d194cdf8c7fbdc4041cef43e770baecbadbfed6c74fc4f5b98c"
         alg: "sha256"
-        verify_hash: false
+        verify_hash: true
         download: true
     deb:
       vagrant:
