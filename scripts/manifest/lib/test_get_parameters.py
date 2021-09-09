@@ -4,7 +4,7 @@ from .get_parameters import get_parameters
 
 class TestGetParameters(unittest.TestCase):
     """
-        test download_file() function
+        test get_parameters() function
     """
 
     def setUp(self) -> None:
