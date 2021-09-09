@@ -1,20 +1,22 @@
 #!/usr/bin/env python3
-#
+"""
 # fetch-manifest.py
 # (c) 2020 Sam Caldwell.  See LICENSE.txt.
 #
 # This script will read a given manifest YAML file download the artifacts to
 # a given asset caching directory and verify their md5 or sha1 hash.
-#
+"""
 import yaml
+import shutil
+import hashlib
+import urllib.request
+from time import time
 from sys import exit
-from os import mkdir
 from os import unlink
+from os import makedirs
 from os.path import join
 from os.path import exists
 from os.path import dirname
-from subprocess import PIPE
-from subprocess import Popen
 from argparse import Namespace
 from argparse import ArgumentParser
 
@@ -23,6 +25,20 @@ This script will read a given manifest YAML file download the artifacts to
 a given asset caching directory and verify their md5 or sha1 hash.
 """
 
+DEFAULT_MANIFEST = join(
+    dirname(
+        dirname(
+            dirname(__file__))),
+    "assets",
+    "manifest.yml")
+
+SUPPORTED_HASH_ALGORITHMS = {
+    "md5": hashlib.md5,
+    "sha1": hashlib.sha1,
+    "sha256": hashlib.sha256,
+    "sha512": hashlib.sha512
+}
+
 
 def get_args() -> Namespace:
     """
@@ -30,116 +46,195 @@ def get_args() -> Namespace:
 
         :return: argparse.Namespace
     """
-
     parser = ArgumentParser(description=PROGRAM_DESCRIPTION)
-
-    parser.add_argument(
-        "--type",
-        dest="type",
-        choices=["iso", "windows", "linux/deb",
-                 "linux/rpm", "linux/src", "macos"],
-        required=True,
-        help="Asset class (group) to be downloaded.  This is a section "
-             "within the manifest yaml file."
-    )
-
     parser.add_argument(
         "--manifest",
         dest="manifest",
         type=str,
+        default=DEFAULT_MANIFEST,
         required=True,
-        help="Manifest path/filename"
-    )
-
+        help="Manifest path/filename")
     parser.add_argument(
         "--asset_cache_dir",
         dest="asset_cache_dir",
         type=str,
         required=False,
-        default=None,
-        help="Optional asset cache directory."
-    )
-
+        default=dirname(DEFAULT_MANIFEST),
+        help="Optional asset cache directory.")
     parser.add_argument(
         "--force",
         dest="force",
         default=False,
         action='store_true',
-        help="Use force on download (deletes if it exists."
-    )
-
+        help="Use force on download (deletes if it exists.")
     args = parser.parse_args()
-
     if not exists(args.manifest):
         print(f"Manifest file not found: '{args.manifest}'")
         exit(1)
-
     if args.asset_cache_dir is None:
         args.asset_cache_dir = dirname(args.manifest)
-
     if not exists(args.asset_cache_dir):
         print(f"Asset cache directory not found: {args.asset_cache_dir}")
         exit(1)
-
     return args
 
 
-def read_manifest(manifest_file: str, section: str) -> dict:
+def fatal_error(m: str, e: int = 1) -> None:
     """
-        Read the yaml manifest and return the section (dict) provided.
+        Print fatal error message then exit with the given exit code.
+        :param m: str (message)
+        :param e: int (exit code)
+        :return: None
+    """
+    print(f"{m}")
+    exit(e)
+
+
+def url_string(s: str) -> bool:
+    """
+        Verify the given string (s) is a URL.
+
+        :param s: string
+        :return: bool
+    """
+    # ToDo: Verify url pattern
+    return type(s) is str
+
+
+def hash_string(s: str) -> bool:
+    """
+        Verify the manifest hash string for a given artifact.
+
+        :param s: str
+        :return: bool
+    """
+    # ToDo: verify hash pattern
+    return type(s) is str
+
+
+def alg_string(s: str) -> bool:
+    """
+        Verify the manifest alg parameter (which
+        will determine which hashing algorithm
+        is used).
+
+        :param s: str
+        :return: bool
+    """
+    return type(s) is str and (
+            s in [k for k, _ in SUPPORTED_HASH_ALGORITHMS.items()]
+    )
+
+
+def verify_hash_bool(b: bool) -> bool:
+    """
+        Verify the manifest verify_hash flag (boolean)
+
+        :param b:
+        :return:
+    """
+    return type(b) is bool
+
+
+def download_bool(b: bool) -> bool:
+    """
+        Verify the manifest download flag (boolean)
+
+        :param b: bool
+        :return: bool
+    """
+    return type(b) is bool
+
+
+def get_parameters(item: str, block: list) -> list:
+    """
+        evaluate a class of items to download and
+        return the list of actual objects to download.
+
+        :return: list
+    """
+    if item == "all":
+        return block[1:]
+    else:
+        return [item]
+
+
+def get_versions(inp_block: dict) -> list:
+    """
+        evaluate a dictionary and return a list of the keys.
+
+        :param inp_block: dict
+        :return: list
+    """
+    return ["all"] + [k for k, _ in inp_block.items()]
+
+
+def download_file(download_url: str, file_name: str) -> bool:
+    """
+        Download the artifact at `download_url` as `file_name`.
+
+        :param download_url: str
+        :param file_name: str
+        :return: bool (error state)
+    """
+    try:
+        with urllib.request.urlopen(download_url) as response:
+            with open(file_name, 'wb') as out_file:
+                shutil.copyfileobj(response, out_file)
+        return exists(file_name)
+    except Exception as ex:
+        fatal_error(f"Error downloading file: {ex}", 10)
+
+
+def read_manifest(manifest_file: str) -> dict:
+    """
+        Read the yaml manifest and return parsed
+        dict content.
 
         :param manifest_file: str
-        :param section: str
         :return: dict
     """
-
     with open(manifest_file, 'r') as f:
         yaml_data = yaml.load(f, Loader=yaml.FullLoader)
-
-        if section not in yaml_data:
-            print(f"ERROR: Section ({section}) not found in manifest.")
-            exit(1)
-
-        return yaml_data[section]
+        return yaml_data
 
 
-def create_target_dir(base_dir: str, asset_dir: str) -> str:
+def create_target_dir(file_name: str) -> bool:
     """
         Create directory path string and the underlying directory if it
         does not exist and return the full string.
-        :param base_dir: str
-        :param asset_dir: str
+
+        :param file_name: str
+        :return: bool
+    """
+    target_dir = dirname(file_name)
+    if not exists(target_dir):
+        makedirs(target_dir)
+    return exists(target_dir)
+
+
+def file_hasher(hash_alg: callable, fname: str) -> str:
+    """
+        Given a hash function and file name, perform the hash operation
+        and return the resulting hash string.
+
+        :param hash_alg: object
+        :param fname: str
         :return: str
     """
-    target_dir = join(base_dir, asset_dir)
-    if not exists(target_dir):
-        mkdir(target_dir)
-
-    return target_dir
-
-
-def get_hash_validation_cmd(alg: str, filename: str) -> list:
-    """
-        return the
-    :param alg: str
-    :param filename: str
-    :return: list
-    """
-    if alg == 'md5':
-        return ["/sbin/md5", filename, "|", "/usr/bin/awk", "'{print $4}'"]
-    elif alg == 'sha1':
-        return ["shasum", "-a", "1", filename, "|", "awk", "'{print $1}'"]
-    elif alg == 'sha256':
-        return ["shasum", "-a", "256", filename, "|", "awk", "'{print $1}'"]
-    elif alg == 'sha512':
-        return ["shasum", "-a", "512", filename, "|", "awk", "'{print $1}'"]
-    else:
-        print(f"unknown or unsupported algorithm: {alg} on {filename}")
-        exit(1)
+    buf_size = 1048576  # 1MB chunks
+    hasher = hash_alg()
+    with open(fname, 'rb') as f:
+        while True:
+            data = f.read(buf_size)
+            if not data:
+                break
+            hasher.update(data)
+    return hasher.hexdigest()
 
 
 def verify_file_hash(filename: str, expected_hash: str, alg: str,
-                     verify: bool = False) -> None:
+                     verify: bool = False) -> bool:
     """
         Verify the filename has the expected hash.
 
@@ -147,131 +242,140 @@ def verify_file_hash(filename: str, expected_hash: str, alg: str,
         :param expected_hash: str
         :param alg: str
         :param verify: bool
+        :return: bool
+    """
+
+    def bad_hash():
+        fatal_error(f"unknown or unsupported algorithm: "
+                    f"{alg} on {filename}", 1)
+
+    hash_alg = SUPPORTED_HASH_ALGORITHMS.get(alg, bad_hash)
+    this_hash = file_hasher(hash_alg, filename).strip().lower()
+    p_print(10, f"hashes: {this_hash} == {expected_hash}")
+    return this_hash == expected_hash.strip().lower()
+
+
+def delete_file(file_name: str, force: bool = False) -> None:
+    """
+        Delete a given file.
+        :param file_name: str
+        :param force: bool
         :return: None
     """
-    if verify:
-        if alg == 'md5':
-            f = ["/sbin/md5", filename], 3
-        elif alg == 'sha1':
-            f = ["shasum", "-a", "1", filename], 0
-        elif alg == 'sha256':
-            f = ["shasum", "-a", "256", filename], 0
-        elif alg == 'sha512':
-            f = ["shasum", "-a", "512", filename], 0
-        else:
-            print(f"unknown or unsupported algorithm: {alg} on {filename}")
+    if force and exists(file_name):
+        p_print(8, f"File exists.  Deleting (--force detected): {file_name}")
+        unlink(file_name)
+        if exists(file_name):
+            p_print(8, f"Check permissions.  Failed to delete {file_name}")
             exit(1)
 
-        print("computing actual hash...")
-        with Popen(f[0], stdout=PIPE) as p:
-            p.wait()
-            print("evaluating results.")
-            actual = p.stdout.read() \
-                .decode(encoding='utf-8') \
-                .strip(' ') \
-                .split(' ')[f[1]]
-            if expected_hash.strip() != actual.strip():
-                print(f"Hash mismatch  : {filename}")
-                print(f"\tactual_hash  : {actual}")
-                print(f"\texpected_hash: {expected_hash}")
-                exit(1)
-            else:
-                print("hash verified.")
-    else:
-        print(f"{filename} hash not verified.")
+
+def p_print(n: int, m: str) -> None:
+    """
+        pretty print messages with an indent of n chars.
+    :param n: int (indent)
+    :param m: str (message)
+    :return: None
+    """
+    print(f"{' ' * n}: {m}")
 
 
-def download_assets(manifest: dict, asset_cache_dir: str, asset_type: str,
+def download_assets(manifest_file: str, asset_cache_dir: str,
                     force: bool = False) -> None:
     """
-        Down iso images to the asset_cache_dir directory.
+        Download iso images and packages to the asset_cache_dir directory.
 
-        :param manifest: dict
+        :param manifest_file: str
         :param asset_cache_dir: str
-        :param asset_type: str
-        :param force: bool (do we download if the file already exists?)
+        :param force: bool
         :return: None
     """
-    target_dir = create_target_dir(asset_cache_dir, asset_type)
-    print(f"manifest_size: {len(manifest)}")
-
-    for group_name, data in manifest.items():
-        if not data["download"]:
-            print(f"{group_name} skipped (download == false)")
-            continue
-
-        print(f"Loading group: {group_name}")
-        url = data["url"]
-        filename = join(target_dir, group_name) + ".iso"
-        verify_hash = data.get("verify_hash") or False
-        if verify_hash:
-            print("verify_hash: true")
-            alg, file_hash = data["alg"], data["hash"]
-        else:
-            print("verify_hash: false")
-            alg, file_hash = "", ""
-
-        if exists(filename):
-            if force:
-                print(f"{filename} exists.  But --force requires delete "
-                      f"and download of the asset..")
-                unlink(filename)
-                if exists(filename):
-                    print(f"Check permissions.  Failed to delete {filename}")
-                    exit(1)
-            else:
-                print(f"{filename} exists.  not downloading.")
-                verify_file_hash(
-                    expected_hash=file_hash,
-                    alg=alg,
-                    filename=filename,
-                    verify=verify_hash)
-                continue
-
-        cmd = ["/usr/bin/curl", "--fail", "--create-dir", "--output",
-               filename, url]
-
-        print(f"download command: {' '.join(cmd)}\nDownloading...")
-        with Popen(cmd, stdout=PIPE) as curl_proc:
-            print(f"{curl_proc.stdout.read()}")
-        print("...done.")
-
-        if exists(filename):
-
-            print(f"{filename} downloaded successfully.")
-            verify_file_hash(
-                expected_hash=file_hash,
-                alg=alg,
-                filename=filename,
-                verify=verify_hash)
-
-        else:
-
-            print(f"{filename} download failed.")
-            exit(1)
+    manifest = read_manifest(manifest_file)
+    for section, section_block in manifest.items():
+        p_print(0, f"Section: {section}")
+        for arch, arch_block in section_block.items():
+            p_print(2, f"Arch: {arch}")
+            for opsys, opsys_block in arch_block.items():
+                p_print(4, f"Opsys: {opsys}")
+                for version, block in opsys_block.items():
+                    p_print(6, f"Version: {version}")
+                    target_dir = join(asset_cache_dir, section, arch, opsys)
+                    file_name = join(target_dir, f"{version}.iso")
+                    alg = block.get("alg", False)
+                    file_hash = block.get("hash", False)
+                    p_print(8, f"Download: Starting ({file_name})")
+                    if block.get("download"):
+                        url = block.get("url")
+                        create_target_dir(file_name=file_name)
+                        delete_file(file_name, force)
+                        if exists(file_name):
+                            p_print(8, f"Download: exists (verifying) "
+                                       f"({file_name})")
+                            if verify_file_hash(expected_hash=file_hash,
+                                                alg=alg,
+                                                filename=file_name):
+                                p_print(8, f"Download: skipped (exists) "
+                                           f"({file_name}) (verified)")
+                                continue
+                            else:
+                                p_print(8, f"Existing file failed integrity "
+                                           f"check...deleting to download "
+                                           f"again.")
+                                delete_file(file_name=file_name, force=True)
+                        start_time = time()
+                        p_print(8, f"Downloading ({file_name}) "
+                                   f"(time: {start_time})")
+                        if not download_file(url, file_name):
+                            fatal_error(f"Download failed.  "
+                                        f"File: {file_name}")
+                        stop_time = time()
+                        p_print(8, f"Download: complete ({file_name}) "
+                                   f"(time elapsed: "
+                                   f"{stop_time - start_time})")
+                        if block.get("verify_hash", False):
+                            p_print(8, f"Download: verifying "
+                                       f"({file_name})")
+                            verify_file_hash(expected_hash=file_hash,
+                                             alg=alg,
+                                             filename=file_name)
+                        else:
+                            p_print(8, f"Download: "
+                                       f"verification disabled "
+                                       f"({file_name})")
+                    else:
+                        p_print(8, f"Download: disabled ({file_name})")
 
 
-def main() -> None:
+def summary(args: Namespace) -> None:
     """
-        Main function.
+        print a pretty summary
+
+        :param args: Namespace
         :return: None
     """
-    print("Starting fetch-manifest.py to download assets.")
-
-    args = get_args()
-
     print(f"\tManifest file:   {args.manifest}")
-    print(f"\tAsset type:      {args.type}")
     print(f"\tAsset Cache Dir: {args.asset_cache_dir}\n")
 
-    manifest = read_manifest(args.manifest, args.type)
 
-    download_assets(manifest,
-                    asset_cache_dir=args.asset_cache_dir,
-                    asset_type=args.type,
-                    force=args.force
-                    )
+def main() -> int:
+    """
+        Main function.
+        :return: int (exit code)
+    """
+    try:
+        print("Starting fetch-manifest.py to download assets.")
+        args = get_args()
+        summary(args)
+        download_assets(manifest_file=args.manifest,
+                        asset_cache_dir=args.asset_cache_dir,
+                        force=args.force)
+        summary(args)
+    except KeyboardInterrupt:
+        return 0
+    except Exception as ex:
+        print(f"Fatal Error: {ex}")
+        return 1
 
 
 if __name__ == "__main__":
-    main()
+    exit(main())
