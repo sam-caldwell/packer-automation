@@ -13,12 +13,14 @@ iso:
     Windows:
       10:
         url: "https://download.microsoft.com/download/C/3/9/C399EEA8-135D-4207-92C9-6AAB3259F6EF/10240.16384.150709-1700.TH1_CLIENTENTERPRISEEVAL_OEMRET_X64FRE_EN-US.ISO"
+        file: "windows-10-amd64.iso"
         hash: "9b53e1f6ab6259a05d0e8f42db5baad50b57da34da9312783f7e8bd4ae2cd3ca"
         alg: "sha256"
         verify_hash: true
         download: true
       2016:
         url: "https://download.microsoft.com/download/1/4/9/149D5452-9B29-4274-B6B3-5361DBDA30BC/14393.0.161119-1705.RS1_REFRESH_SERVER_EVAL_X64FRE_EN-US.ISO"
+        file: "windows-2016-amd64.iso"
         hash: "70721288bbcdfe3239d8f8c0fae55f1f"
         alg: "md5"
         verify_hash: true
@@ -27,6 +29,7 @@ iso:
     Linux/Ubuntu/Server:
       20.04:
         url: "https://cdimage.ubuntu.com/ubuntu-legacy-server/releases/20.04/release/ubuntu-20.04.1-legacy-server-amd64.iso"
+        file: "ubuntu-20.04-amd64.iso"
         hash: "f11bda2f2caed8f420802b59f382c25160b114ccc665dbac9c5046e7fceaced2"
         alg: "sha256"
         verify_hash: true
@@ -35,6 +38,7 @@ iso:
     Linux/Kali:
       2021.2:
         url: "https://cdimage.kali.org/kali-2021.2/kali-linux-2021.2-installer-netinst-amd64.iso"
+        file: "kali-2021.2-amd64.iso"
         hash: "bfe9e2797eff82996dfad8144c4d2c80d1aab2549e7f382ff17159f5018d44aa"
         alg: "sha256"
         verify_hash: true
@@ -44,42 +48,49 @@ package:
     Windows:
       openssh:
         url: "https://www.mls-software.com/files/setupssh-8.1p1-1.exe"
+        file: "openssh.exe"
         hash: "9d6e5f5e36899ec4e8391c368c496796b36c8a62"
         alg: "sha1"
         verify_hash: false
         download: false
       sdelete:
         url: "https://download.sysinternals.com/files/SDelete.zip"
+        file: "SDelete.zip"
         hash: "4e9d2617dc2e1d194cdf8c7fbdc4041cef43e770baecbadbfed6c74fc4f5b98c"
         alg: "sha256"
         verify_hash: false
         download: false
       7zip:
         url: "https://www.7-zip.org/a/7z920-x64.msi"
+        file: "7-zip.msi"
         hash: ""
         alg: ""
         verify_hash: false
         download: false
       rsync:
         url: "https://mirrors.kernel.org/sourceware/cygwin/x86_64/release/rsync/rsync-3.1.2-1.tar.xz"
+        file: "rsync.tar.xz"
         hash: ""
         alg: ""
         verify_hash: false
         download: false
       chocolatey:
         url: "https://chocolatey.org/install.ps1"
+        file: "chocolatey.ps1"
         hash: ""
         alg: ""
         verify_hash: false
         download: false
       kb3102810:
         url: "https://download.microsoft.com/download/F/A/A/FAABD5C2-4600-45F8-96F1-B25B137E3C87/Windows6.1-KB3102810-x64.msu"
+        file: "kb3102810-x64.msu"
         hash: ""
         alg: ""
         verify_hash: false
         download: false
       vagrant:
         url: "https://releases.hashicorp.com/vagrant/2.2.6/vagrant_2.2.6_x86_64.msi"
+        file: "vagrant.msi"
         hash: ""
         alg: "sha256"
         verify_hash: false
@@ -87,6 +98,7 @@ package:
     deb:
       vagrant:
         url: "https://releases.hashicorp.com/vagrant/2.2.6/vagrant_2.2.6_x86_64.deb"
+        file: "vagrant.deb"
         hash: "d5070fa1005a6073b1f923e4726066a0d95edc94c3034212115a9e3423caa832"
         alg: "sha256"
         verify_hash: false
@@ -94,6 +106,7 @@ package:
     MacOS:
       vagrant:
         url: "https://releases.hashicorp.com/vagrant/2.2.6/vagrant_2.2.6_x86_64.dmg"
+        file: "vagrant.dmg"
         hash: "d5398ec0a29938017c27e98c5a4445ed64f131caa115265da61c795229ef47f7"
         alg: "sha256"
         verify_hash: false

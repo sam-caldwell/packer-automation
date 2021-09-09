@@ -300,12 +300,15 @@ def download_assets(manifest_file: str, asset_cache_dir: str,
                 for version, block in opsys_block.items():
                     p_print(6, f"Version: {version}")
                     target_dir = join(asset_cache_dir, section, arch, opsys)
-                    file_name = join(target_dir, f"{version}.iso")
+                    url = block.get("url")
+                    file_name = join(
+                        target_dir,
+                        block.get("file",
+                                  f"{url.split('/')[-1].lower()}"))
                     alg = block.get("alg", False)
                     file_hash = block.get("hash", False)
                     p_print(8, f"Download: Starting ({file_name})")
                     if block.get("download"):
-                        url = block.get("url")
                         create_target_dir(file_name=file_name)
                         delete_file(file_name, force)
                         if exists(file_name):
