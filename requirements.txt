@@ -1,0 +1,5 @@
+boto3
+docker
+localstack
+urllib3
+flake8
