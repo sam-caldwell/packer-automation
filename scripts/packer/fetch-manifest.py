@@ -305,7 +305,8 @@ def download_assets(manifest_file: str, asset_cache_dir: str,
                         target_dir,
                         block.get("file",
                                   f"{url.split('/')[-1].lower()}"))
-                    alg = block.get("alg", False)
+                    alg = block.get("alg", "none")
+                    verify_hash = block.get("verify_hash", False)
                     file_hash = block.get("hash", False)
                     p_print(8, f"Download: Starting ({file_name})")
                     if block.get("download"):
@@ -314,9 +315,10 @@ def download_assets(manifest_file: str, asset_cache_dir: str,
                         if exists(file_name):
                             p_print(8, f"Download: exists (verifying) "
                                        f"({file_name})")
-                            if verify_file_hash(expected_hash=file_hash,
-                                                alg=alg,
-                                                filename=file_name):
+                            if verify_hash and verify_file_hash(
+                                    expected_hash=file_hash,
+                                    alg=alg,
+                                    filename=file_name):
                                 p_print(8, f"Download: skipped (exists) "
                                            f"({file_name}) (verified)")
                                 continue
