@@ -1,9 +1,10 @@
 *.iml
 .idea/
-
 .DS_Store
-/box/*.box
-/iso/*.iso
+assets/iso/
+assets/package/
+box/*.box
+iso/*.iso
 !/iso/README.md
 /output-vmware/
 /output-vmware-iso/
@@ -14,12 +15,23 @@
 /*.box
 /packer_cache/
 
-*.tar.gz
-*.zip
-*.dmg
-*.deb
-*.rpm
 *.7z
-*.msi
+*.bz2
+*.bzip
+*.bzip2
+*.deb
+*.dmg
+*.exe
 
+*.gz
+*.img
+*.iso
+*.msi
+*.msu
+*.pkg
 *.py[co]
+*.rpm
+*.tar.bz2
+*.tar.gz
+*.tar.xz
+*.zip
