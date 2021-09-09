@@ -16,6 +16,7 @@ def get_parameters(item: str, block: list) -> list:
         :return: list
     """
     if item == "all":
-        return block[1:]
+        block.remove("all")
+        return block
     else:
         return [item]
