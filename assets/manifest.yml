@@ -51,63 +51,70 @@ package:
         file: "openssh.exe"
         hash: "9d6e5f5e36899ec4e8391c368c496796b36c8a62"
         alg: "sha1"
-        verify_hash: false
-        download: false
+        verify_hash: true
+        download: true
       sdelete:
         url: "https://download.sysinternals.com/files/SDelete.zip"
         file: "SDelete.zip"
         hash: "4e9d2617dc2e1d194cdf8c7fbdc4041cef43e770baecbadbfed6c74fc4f5b98c"
         alg: "sha256"
-        verify_hash: false
-        download: false
+        verify_hash: true
+        download: true
       7zip:
         url: "https://www.7-zip.org/a/7z920-x64.msi"
         file: "7-zip.msi"
-        hash: ""
-        alg: ""
-        verify_hash: false
-        download: false
+        hash: "62df458bc521001cd9a947643a84810ecbaa5a16b5c8e87d80df8e34c4a16fe2"
+        alg: "sha256"
+        verify_hash: true
+        download: true
       rsync:
-        url: "https://mirrors.kernel.org/sourceware/cygwin/x86_64/release/rsync/rsync-3.1.2-1.tar.xz"
+        url: "https://mirrors.kernel.org/sourceware/cygwin/x86_64/release/rsync/rsync-3.2.3%2B20200903%2Bgit9f9240b-4.tar.xz"
         file: "rsync.tar.xz"
-        hash: ""
-        alg: ""
-        verify_hash: false
-        download: false
+        hash: "ce253c4a8245b736cbe2078b32b6419ea2d994fd17de4186894ca743e310545c"
+        alg: "sha256"
+        verify_hash: true
+        download: true
       chocolatey:
         url: "https://chocolatey.org/install.ps1"
         file: "chocolatey.ps1"
-        hash: ""
-        alg: ""
-        verify_hash: false
-        download: false
+        hash: "e3c549499785072f31c7429c23665042fdc6a6731852238a97cf8a395a7913cc"
+        alg: "sha256"
+        verify_hash: true
+        download: true
       kb3102810:
         url: "https://download.microsoft.com/download/F/A/A/FAABD5C2-4600-45F8-96F1-B25B137E3C87/Windows6.1-KB3102810-x64.msu"
         file: "kb3102810-x64.msu"
+        hash: "ea00d526d57d37b6bb9fa788a4f72e145f929796249b7798d4d6a15b4c11a517"
+        alg: "sha256"
+        verify_hash: false
+        download: true
+      sysinternals:
+        url: "https://download.sysinternals.com/files/SysinternalsSuite.zip"
+        file: "SysinternalsSuite.zip"
         hash: ""
         alg: ""
         verify_hash: false
-        download: false
+        download: true
       vagrant:
         url: "https://releases.hashicorp.com/vagrant/2.2.6/vagrant_2.2.6_x86_64.msi"
         file: "vagrant.msi"
-        hash: ""
+        hash: "4e9d2617dc2e1d194cdf8c7fbdc4041cef43e770baecbadbfed6c74fc4f5b98c"
         alg: "sha256"
         verify_hash: false
-        download: false
+        download: true
     deb:
       vagrant:
         url: "https://releases.hashicorp.com/vagrant/2.2.6/vagrant_2.2.6_x86_64.deb"
         file: "vagrant.deb"
         hash: "d5070fa1005a6073b1f923e4726066a0d95edc94c3034212115a9e3423caa832"
         alg: "sha256"
-        verify_hash: false
-        download: false
+        verify_hash: true
+        download: true
     MacOS:
       vagrant:
         url: "https://releases.hashicorp.com/vagrant/2.2.6/vagrant_2.2.6_x86_64.dmg"
         file: "vagrant.dmg"
         hash: "d5398ec0a29938017c27e98c5a4445ed64f131caa115265da61c795229ef47f7"
         alg: "sha256"
-        verify_hash: false
-        download: false
+        verify_hash: true
+        download: true
