@@ -14,7 +14,7 @@ help: help-banner \
 	@echo ""
 	@printf "\nVersion: $(shell cat VERSION.txt | head -n 1)\n$(shell cat COPYRIGHT.txt | head -n 1)\n\n"
 
-#	@echo 'make fetch/all                 :  ...to fetch all assets (fetch-*)'
+#	@echo 'make                  :  ...to '
 #	@echo 'make fetch/iso                 :  ...to fetch the iso files listed in assetts/manifest.yml.'
 #	@echo 'make fetch/windows             :  ...to fetch the windows files listed in assetts/manifest.yml.'
 #	@echo 'make fetch/linux/deb           :  ...to fetch the linux/deb files listed in assetts/manifest.yml.'

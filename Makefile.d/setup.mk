@@ -23,6 +23,7 @@ setup-hypervisor: setup-hv-virtualbox \
 
 setup-hv-virtualbox:
 ifeq ($(shell cat SUPPORTED_HYPERVISORS.txt | grep virtualbox | head -n1 | awk -F\: '{print $$2}' | sed -e 's/ //'),"enabled")
+	#ToDo: use cached objects pulled by make fetch/*
 	ifeq ($(HOST_OS),"windows")
 		@echo "installing virtualbox for windows."
 		URL=https://download.virtualbox.org/virtualbox/6.0.14/VirtualBox-6.0.14-133895-Win.exe
