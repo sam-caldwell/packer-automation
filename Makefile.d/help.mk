@@ -10,18 +10,11 @@ help: help-banner \
 	  help-setup \
 	  help-list \
 	  help-list-boxes \
-	  help-lint
+	  help-lint \
+	  help-assets
 	@echo ""
 	@printf "\nVersion: $(shell cat VERSION.txt | head -n 1)\n$(shell cat COPYRIGHT.txt | head -n 1)\n\n"
 
-#	@echo 'make                  :  ...to '
-#	@echo 'make fetch/iso                 :  ...to fetch the iso files listed in assetts/manifest.yml.'
-#	@echo 'make fetch/windows             :  ...to fetch the windows files listed in assetts/manifest.yml.'
-#	@echo 'make fetch/linux/deb           :  ...to fetch the linux/deb files listed in assetts/manifest.yml.'
-#	@echo 'make fetch/linux/rpm           :  ...to fetch the linux/rpm files listed in assetts/manifest.yml.'
-#	@echo 'make fetch/linux/src           :  ...to fetch the linux/src files listed in assetts/manifest.yml.'
-#	@echo 'make fetch/macos               :  ...to fetch the macos files listed in assetts/manifest.yml.'
-#	@echo ' '
 #	@echo 'make [feature-flags] <opsys>   : ...to create a box with the given operating system config.'
 #	@echo 'make [feature-flags] push      : ...to push the set of all boxes created to local/remote stores.'
 #	@echo ' '
