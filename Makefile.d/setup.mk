@@ -11,8 +11,12 @@ setup: setup-banner \
 	   setup-package-manager \
 	   setup-vagrant \
 	   setup-packer \
-	   setup-hypervisor
+	   setup-hypervisor \
+	   setup-pip-packages
 	@echo "setup complete"
+
+setup-pip-packages:
+	pip3 install -r requirements.txt
 
 setup-hypervisor: setup-hv-virtualbox \
 				  setup-hv-vmware \
