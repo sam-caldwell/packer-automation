@@ -318,9 +318,9 @@ def download_assets(manifest_file: str, asset_cache_dir: str,
                                            f"({file_name}) (verified)")
                                 continue
                             else:
-                                p_print(8, f"Existing file failed integrity "
-                                           f"check...deleting to download "
-                                           f"again.")
+                                p_print(8, "Existing file failed integrity "
+                                           "check...deleting to download "
+                                           "again.")
                                 delete_file(file_name=file_name, force=True)
                         start_time = time()
                         p_print(8, f"Downloading ({file_name}) "
