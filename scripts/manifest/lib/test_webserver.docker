@@ -1,0 +1,49 @@
+FROM ubuntu:latest
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update -y --fix-missing && \
+    apt-get upgrade -y && \
+    apt-get install --no-install-recommends -y nginx perl
+
+RUN echo 'user www-data;' > /etc/nginx/nginx.conf && \
+    echo 'worker_processes auto;' >> /etc/nginx/nginx.conf && \
+    echo 'pid /run/nginx.pid;' >> /etc/nginx/nginx.conf && \
+    echo 'load_module modules/ngx_http_image_filter_module.so;' >> /etc/nginx/nginx.conf && \
+    echo 'load_module modules/ngx_http_xslt_filter_module.so;' >> /etc/nginx/nginx.conf && \
+    echo 'load_module modules/ngx_stream_module.so;' >> /etc/nginx/nginx.conf && \
+    echo 'events {' >> /etc/nginx/nginx.conf && \
+    echo '  worker_connections 200;' >> /etc/nginx/nginx.conf && \
+    echo '}' >> /etc/nginx/nginx.conf && \
+    echo 'http {' >> /etc/nginx/nginx.conf && \
+    echo '  sendfile on;' >> /etc/nginx/nginx.conf && \
+    echo '  tcp_nopush on;' >> /etc/nginx/nginx.conf && \
+    echo '  tcp_nodelay on;' >> /etc/nginx/nginx.conf && \
+    echo '  keepalive_timeout 65;' >> /etc/nginx/nginx.conf && \
+    echo '  types_hash_max_size 2048;' >> /etc/nginx/nginx.conf && \
+    echo '  server_tokens off;' >> /etc/nginx/nginx.conf && \
+    echo '  include /etc/nginx/mime.types;' >> /etc/nginx/nginx.conf && \
+    echo '  default_type application/octet-stream;' >> /etc/nginx/nginx.conf && \
+    echo '  gzip on;' >> /etc/nginx/nginx.conf && \
+    echo '  server {' >> /etc/nginx/nginx.conf && \
+    echo '    listen 8080 default_server;' >> /etc/nginx/nginx.conf && \
+    echo '    listen [::]:8080 default_server;' >> /etc/nginx/nginx.conf && \
+    echo '    root /var/www/html;' >> /etc/nginx/nginx.conf && \
+    echo '    index index.html;' >> /etc/nginx/nginx.conf && \
+    echo '    server_name _;' >> /etc/nginx/nginx.conf && \
+    echo '    location / {' >> /etc/nginx/nginx.conf && \
+    echo '      try_files $uri $uri/ =404;'  >> /etc/nginx/nginx.conf && \
+    echo '    }' >> /etc/nginx/nginx.conf && \
+    echo '  }' >> /etc/nginx/nginx.conf && \
+    echo '}' >> /etc/nginx/nginx.conf
+
+RUN echo "#!/bin/bash -xe" > /usr/local/sbin/start.sh && \
+    echo "/usr/sbin/nginx -c /etc/nginx/nginx.conf -g 'daemon off;'" >> /usr/local/sbin/start.sh && \
+    chmod +x /usr/local/sbin/start.sh
+
+RUN dd if=/dev/urandom of=/var/www/html/content.dat bs=1048576 count=1024 && \
+    ls -la /var/www/html/content.dat && \
+    shasum -a 256 /var/www/html/content.dat | awk '{print $1}' > /var/www/html/content.hash
+
+
+CMD [ "/usr/local/sbin/start.sh" ]
